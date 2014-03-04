@@ -1,17 +1,18 @@
 /**************************************************************************
-* Source File	:  Tache.java
+* Source File	:  Vol.java
 * Author                   :  DUMONT  
 * Project name         :  Non enregistré* Created                 :  03/03/2014
 * Modified   	:  03/03/2014
-* Description	:  Definition of the class Tache
+* Description	:  Definition of the class Vol
 **************************************************************************/
 
 
 
+import java.util.*;
 
 
 
-public  class Tache  
+public  class Vol  
 { 
 	//Inners Classifiers
 	
@@ -21,17 +22,13 @@ public  class Tache
 		
 	
 		private 
-	 char idTache;
-		private 
-	 char dateDebut;
-		private 
-	 char dateFin;
+	 char codeVol;
 	
 	//Attributes Association
 	
-		Agent lAgent;
+		Avion lAvion;
 	 
-		Vol leVol;
+		Tache lesTaches[];
 	 
 	
 	
@@ -45,6 +42,6 @@ public  class Tache
 	
 	
 
-} //End Class Tache
+} //End Class Vol
 
 
