@@ -21,30 +21,44 @@ public abstract class Vol
 		
 		
 	
-		private 
-	 char codeVol;
+		private String codeVol;
 	
 	//Attributes Association
 	
-		Avion lAvion;
+		private Avion lAvion;
 	 
-		Tache lesTaches[];
+		private HashMap<Integer,Tache> lesTaches;
 	 
+		private HashMap<String, Vol> lesVols;
 	
 	
+		public HashMap<Integer, Tache> getLesTaches(){
+			return lesTaches;
+		}
+		public Avion getLavion(){
+			return lAvion;
+		}
+		
+		public String getCodeVol(){
+			return codeVol;
+		}
+		
+		public String toString(){
+			return codeVol;
+		}
 	
-	
-
-	
-	//Operations
-	
-		public 
-	 void lesInstances()
+		public void lesInstances()
 		{
 	
-	   		// TODO: implement
+			Collection<Vol> col = lesVols.values();
+			Iterator it = col.iterator();
+			while(it.hasNext()){
+				System.out.println((Vol)it.next());
+			}
 	
 		}
+		
+		
 	
 		
 	
