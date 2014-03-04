@@ -2,7 +2,7 @@
 * Source File	:  Agent_mi_temps.java
 * Author                   :  DUMONT  
 * Project name         :  Non enregistré* Created                 :  03/03/2014
-* Modified   	:  03/03/2014
+* Modified   	:  04/03/2014
 * Description	:  Definition of the class Agent_mi_temps
 **************************************************************************/
 
@@ -31,7 +31,15 @@ public  class Agent_mi_temps  extends Agent
 
 	
 	//Operations
-		
+	
+		public 
+	 void lesInstances()
+		{
+	
+	   		// TODO: implement
+	
+		}
+	
 		
 	
 	

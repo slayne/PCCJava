@@ -12,7 +12,7 @@ import java.util.*;
 
 
 
-public  class Agent  
+public abstract class Agent  
 { 
 	//Inners Classifiers
 	
@@ -43,15 +43,11 @@ public  class Agent
 	//Operations
 	
 		public 
-	 void calculHoraireDebut(int numSemaine)
-		{
-	
-	   		// TODO: implement
-	
-		}
-	
+		       abstract void calculHoraireDebut(int numSemaine);
 		public 
-	 void calculHoraireFin(int numSemaine)
+		       abstract void calculHoraireFin(int numSemaine);
+		public 
+	 void lesInstances()
 		{
 	
 	   		// TODO: implement
