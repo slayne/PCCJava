@@ -1,5 +1,7 @@
-import java.util.Date;
+import java.util.Horaire;
 import java.util.HashMap;
+
+import aeroport.Horaire;
 
 /**************************************************************************
 * Source File	:  Tache.java
@@ -18,8 +20,7 @@ public  abstract class Tache
 { 
 	
 		private int idTache;
-		private Date dateDebut;
-		private Date dateFin;
+		private TrancheHoraire tranche;
 		
 		private static int ident=0;
 		private static HashMap<Integer,Tache> lesTaches;
@@ -28,8 +29,8 @@ public  abstract class Tache
 		Vol leVol;
 
 	    public Tache(){
-	    	setDateDebut(new Date());
-	    	setDateFin(new Date());
+	    	sethoraireDebut(new Horaire());
+	    	sethoraireFin(new Horaire());
 	    	idTache=ident;
 	    	leVol=new Vol();
 	    	lAgent=new Agent();
@@ -38,11 +39,11 @@ public  abstract class Tache
 	    }
 	    
 	    public String toString(){
-	    	return("Tache : "+idTache+"\nDate début : "+dateDebut.toString()+"\nDate Fin : "+dateFin.toString()+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString());
+	    	return("Tache : "+idTache+"\n"+tranche.toString()+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString());
 	    }
-	    public Tache(Date dd,Date df,Agent a,Vol v){
-	    	setDateDebut(dd);
-	    	setDateFin(df);
+	    public Tache(Horaire dd,Horaire df,Agent a,Vol v){
+	    	sethoraireDebut(dd);
+	    	sethoraireFin(df);
 	    	idTache=ident;
 	    	lAgent=a;
 	    	leVol=v;
@@ -60,22 +61,25 @@ public  abstract class Tache
 			System.out.println(this.toString());
 		}
 
-		public Date getDateFin() {
-			return dateFin;
+		public Horaire gethoraireFin() {
+			return tranche.getFinTrancheHoraire();
 		}
 
-		public void setDateFin(Date dateFin) {
-			this.dateFin = dateFin;
+		public void sethoraireFin(Horaire hf) {
+			this.tranche.setFinTrancheHoraire(hf);
 		}
 
-		public Date getDateDebut() {
-			return dateDebut;
+		public Horaire gethoraireDebut() {
+			return tranche.getDebutTrancheHoraire();
 		}
 
-		public void setDateDebut(Date dateDebut) {
-			this.dateDebut = dateDebut;
+		public void sethoraireDebut(Horaire hd) {
+			tranche.setDebutTrancheHoraire(hd);
 		}
-	
+		
+		public Duree getDuree(){
+			return tranche.getDuree();
+		}
 }
 
 

@@ -95,5 +95,12 @@ public class TrancheHoraire {
     String info=" début:"+debut.toString()+ " fin:"+fin.toString();
     return info;
   }
+public void setFinTrancheHoraire(Horaire hf) {
+	fin=hf;	
+}
+
+public void setDebutTrancheHoraire(Horaire d){
+	debut=d;
+}
 
 }
