@@ -24,13 +24,13 @@ import java.util.*;
 			
 			
 		
-			private Duree horaireArrive;
+			private Horaire horaireArrive;
 			private String villeDarrive;
 			private HashMap<String, Vol_arrive> lesVolsArrives;
 		
 		
 			//Operations
-			public Vol_arrive(String cde, String cdeAvion, Duree hor, String ville){
+			public Vol_arrive(String cde, String cdeAvion, Horaire hor, String ville){
 				super(cde, cdeAvion);
 				horaireArrive = hor;
 				villeDarrive = ville;
@@ -38,7 +38,7 @@ import java.util.*;
 				
 			}
 			
-			public Duree getHoraireArrive(){
+			public Horaire getHoraireArrive(){
 				return horaireArrive;
 			}
 			
@@ -94,7 +94,7 @@ import java.util.*;
 			    	 
 			    	 }
 			    		
-			    	 new Vol_arrive(cde, cdeAvion, new Duree(heure, minute), ville);
+			    	 new Vol_arrive(cde, cdeAvion, new Horaire(heure, minute), ville);
 			    		 
 			      }
 				

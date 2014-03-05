@@ -14,8 +14,10 @@ import java.util.*;
 
 public  class Tache_embarquement  extends Tache 
 { 
-	//Inners Classifiers
-	
+	public Tache_embarquement(Agent a,Vol_depart v){
+		super(v.getHoraireDepart().retrait(new Duree(15)),v.getHoraireDepart().retrait(new Duree(5)),a,v);
+		this.setType("Embarquement");
+	}
 
 	//Attributes
 		
