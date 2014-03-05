@@ -8,6 +8,9 @@
 
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -28,8 +31,8 @@ public  class Vol_depart  extends Vol
 		
 		//Operations
 		
-		public Vol_depart(String cde, Duree hor, String ville){
-			super(cde);
+		public Vol_depart(String cde, String cdeAvion, Duree hor, String ville){
+			super(cde, cdeAvion);
 			horaireDepart = hor;
 			villeDepart = ville;
 			lesVolsDepart.put(cde, this);
@@ -59,6 +62,44 @@ public  class Vol_depart  extends Vol
 	
 		}
 		
+		
+		public static void creerTouslesVolsDepart(String cheminFichier) throws IOException{
+			
+			 BufferedReader entree = new BufferedReader(new FileReader(cheminFichier));
+			 String ligne;
+			 StringTokenizer mots;
+			 String mot, cde = "null", ville = "null", cdeAvion = "null" ;
+			 int cap=0; 
+			 int heure = 0;
+			 int minute = 0;
+			 
+			 while ((ligne = entree.readLine()) != null) // boucle de lecture/affichage du fichier
+		      {
+		    	 //System.out.println("ligne :" + ligne);
+		    	 mots = new StringTokenizer(ligne);
+		    	 
+		    	 for(int i=0; i<5;i++){
+		    		 mot = mots.nextToken();
+		    		 //System.out.println("Mot :" + mot);
+		    		 if(i==0){
+		    			 cde = mot;
+		    		 }else if(i==1) {
+		    			 heure = Integer.parseInt(mot);
+		    		 }else if(i==2){
+		    			minute =  Integer.parseInt(mot);
+		    		 }else if(i==3){
+			    		ville =  mot;
+		    		 }else if(i==4){
+			    			cdeAvion =  mot;
+		    		 }
+		    	 
+		    	 }
+		    		
+		    	 new Vol_depart(cde, cdeAvion, new Duree(heure, minute), ville);
+		    		 
+		      }
+			
+		}
 	
 		
 	

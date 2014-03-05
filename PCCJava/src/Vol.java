@@ -8,6 +8,7 @@
 
 
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -26,15 +27,16 @@ public abstract class Vol
 	
 	//Attributes Association
 	
-		private Avion lAvion;
+		private String lAvion;
 	 
 		private HashMap<Integer,Tache> lesTaches;
 	 
 		private HashMap<String, Vol> lesVols;
 		
-		public Vol(String cde){
+		public Vol(String cde, String cdeAvion){
 			
 			codeVol = cde;
+			lAvion = cdeAvion;
 			lesVols.put(codeVol, this);
 			
 		}
@@ -43,7 +45,7 @@ public abstract class Vol
 		public HashMap<Integer, Tache> getLesTaches(){
 			return lesTaches;
 		}
-		public Avion getLavion(){
+		public String getLavion(){
 			return lAvion;
 		}
 		
@@ -65,6 +67,14 @@ public abstract class Vol
 				System.out.println((Vol)it.next());
 			}
 	
+		}
+		
+		
+		public static void creerTousLesVols(String fichierArrive, String fichierDepart) throws IOException{
+			Vol_arrive.creerTouslesVolsArrives(fichierArrive);
+			Vol_depart.creerTouslesVolsDepart(fichierDepart);
+			
+			
 		}
 		
 		
