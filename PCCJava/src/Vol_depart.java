@@ -24,14 +24,14 @@ public  class Vol_depart  extends Vol
 		
 		
 	
-		private Duree horaireDepart;
+		private Horaire horaireDepart;
 		private String villeDepart;
 		private HashMap<String, Vol_depart> lesVolsDepart;
 		
 		
 		//Operations
 		
-		public Vol_depart(String cde, String cdeAvion, Duree hor, String ville){
+		public Vol_depart(String cde, String cdeAvion, Horaire hor, String ville){
 			super(cde, cdeAvion);
 			horaireDepart = hor;
 			villeDepart = ville;
@@ -39,7 +39,7 @@ public  class Vol_depart  extends Vol
 			
 		}
 		
-		public Duree getHoraireDepart(){
+		public Horaire getHoraireDepart(){
 			return horaireDepart;
 		}
 		
@@ -95,7 +95,7 @@ public  class Vol_depart  extends Vol
 		    	 
 		    	 }
 		    		
-		    	 new Vol_depart(cde, cdeAvion, new Duree(heure, minute), ville);
+		    	 new Vol_depart(cde, cdeAvion, new Horaire(heure, minute), ville);
 		    		 
 		      }
 			
