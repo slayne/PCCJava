@@ -14,31 +14,17 @@ import java.util.*;
 
 public  class Tache_accueil_Information  extends Tache 
 { 
-	//Inners Classifiers
+	public Tache_accueil_Information (String t,Horaire dd,Horaire df,Agent a,Vol v){
+		// TODO quand agent finis
+		this.setType("Accueil-Information");
+	}
 	
-
-	//Attributes
-		
-		
-	
-	
-	//Attributes Association
-	
-	
-	
-	
-	
-
-	
-	//Operations
-	
-		public 
-	 void lesInstances()
-		{
+	public void lesInstances()
+	{
 	
 	   		// TODO: implement
 	
-		}
+	}
 	
 		
 	

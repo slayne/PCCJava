@@ -21,6 +21,7 @@ public  abstract class Tache
 	
 		private int idTache;
 		private TrancheHoraire tranche;
+		private String type;
 		
 		private static int ident=0;
 		private static HashMap<Integer,Tache> lesTaches;
@@ -32,14 +33,15 @@ public  abstract class Tache
 	    	sethoraireDebut(new Horaire());
 	    	sethoraireFin(new Horaire());
 	    	idTache=ident;
-	    	leVol=new Vol();
-	    	lAgent=new Agent();
+	    	setType(new String());
+	    //	leVol=new Vol();
+	    //	lAgent=new Agent();
 	    	lesTaches.put(idTache, this);
 	    	ident++;
 	    }
 	    
 	    public String toString(){
-	    	return("Tache : "+idTache+"\n"+tranche.toString()+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString());
+	    	return("Tache : "+idTache+"Type : "+this.getType()+"\n"+tranche.toString()+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString());
 	    }
 	    public Tache(Horaire dd,Horaire df,Agent a,Vol v){
 	    	sethoraireDebut(dd);
@@ -79,6 +81,30 @@ public  abstract class Tache
 		
 		public Duree getDuree(){
 			return tranche.getDuree();
+		}
+		
+		public Vol getVol(){
+			return leVol;
+		}
+		
+		public void setVol(Vol v){
+			leVol=v;
+		}
+		
+		public Agent getAgent(){
+			return lAgent;
+		}
+		
+		public void setAgent(Agent a){
+			lAgent=a;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(String type) {
+			this.type = type;
 		}
 }
 

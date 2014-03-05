@@ -14,15 +14,10 @@ import java.util.*;
 
 public  class Tache_debarquement  extends Tache 
 { 
-	//Inners Classifiers
-	
-
-	//Attributes
-		
-		
-	
-	
-	//Attributes Association
+	public Tache_debarquement(Agent a,Vol_arrive v){
+		super(v.getHoraireArrive().retrait(new Duree(15)),v.getHoraireArrive().retrait(new Duree(5)),a,v);
+		this.setType("Débarquement");
+	}
 	
 	
 	
