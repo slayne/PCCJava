@@ -21,28 +21,35 @@ public  class Vol_depart  extends Vol
 		
 		
 	
-		private 
-	 char horaireDepart;
-		private 
-	 char villeDestination;
+		private String horaireDepart;
+		private String villeDepart;
+		private HashMap<String, Vol_depart> lesVolsDepart;
+		
+		
+		//Operations
+		public Duree getHoraireDepart(){
+			return horaireDepart;
+		}
+		
+		public String getVille(){
+			return villeDepart;
+		}
+		
+		public String toString(){
+			return super.toString() + " " + horaireDepart + " "+ villeDarrive;
+		}
 	
-	//Attributes Association
-	
-	
-	
-	
-	
-
-	
-	//Operations
-	
-		public 
-	 void lesInstances()
+		public void lesInstances()
 		{
 	
-	   		// TODO: implement
+			Collection<Vol_depart> col = lesVolsDepart.values();
+			Iterator it = col.iterator();
+			while(it.hasNext()){
+				System.out.println((Vol_depart)it.next());
+			}
 	
 		}
+		
 	
 		
 	

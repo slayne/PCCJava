@@ -22,6 +22,7 @@ public abstract class Vol
 		
 	
 		private String codeVol;
+		
 	
 	//Attributes Association
 	
@@ -30,6 +31,11 @@ public abstract class Vol
 		private HashMap<Integer,Tache> lesTaches;
 	 
 		private HashMap<String, Vol> lesVols;
+		
+		public Vol(String cde){
+			
+			
+		}
 	
 	
 		public HashMap<Integer, Tache> getLesTaches(){
@@ -42,6 +48,7 @@ public abstract class Vol
 		public String getCodeVol(){
 			return codeVol;
 		}
+		
 		
 		public String toString(){
 			return codeVol;
