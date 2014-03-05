@@ -27,6 +27,14 @@
 		
 		
 			//Operations
+			public Vol_arrive(String cde, Duree hor, String ville){
+				super(cde);
+				horaireArrive = hor;
+				villeDarrive = ville;
+				lesVolsArrives.put(cde, this);
+				
+			}
+			
 			public Duree getHoraireArrive(){
 				return horaireArrive;
 			}

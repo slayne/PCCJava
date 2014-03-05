@@ -21,12 +21,21 @@ public  class Vol_depart  extends Vol
 		
 		
 	
-		private String horaireDepart;
+		private Duree horaireDepart;
 		private String villeDepart;
 		private HashMap<String, Vol_depart> lesVolsDepart;
 		
 		
 		//Operations
+		
+		public Vol_depart(String cde, Duree hor, String ville){
+			super(cde);
+			horaireDepart = hor;
+			villeDepart = ville;
+			lesVolsDepart.put(cde, this);
+			
+		}
+		
 		public Duree getHoraireDepart(){
 			return horaireDepart;
 		}
@@ -36,7 +45,7 @@ public  class Vol_depart  extends Vol
 		}
 		
 		public String toString(){
-			return super.toString() + " " + horaireDepart + " "+ villeDarrive;
+			return super.toString() + " " + horaireDepart + " "+ villeDepart;
 		}
 	
 		public void lesInstances()

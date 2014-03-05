@@ -34,6 +34,8 @@ public abstract class Vol
 		
 		public Vol(String cde){
 			
+			codeVol = cde;
+			lesVols.put(codeVol, this);
 			
 		}
 	
