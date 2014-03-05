@@ -1,9 +1,10 @@
+package aeroport;
 /**************************************************************************
-* Source File	:  Tache_embarquement.java
+* Source File	:  Tache_debarquement.java
 * Author                   :  DUMONT  
 * Project name         :  Non enregistré* Created                 :  03/03/2014
 * Modified   	:  04/03/2014
-* Description	:  Definition of the class Tache_embarquement
+* Description	:  Definition of the class Tache_debarquement
 **************************************************************************/
 
 
@@ -12,19 +13,12 @@ import java.util.*;
 
 
 
-public  class Tache_embarquement  extends Tache 
+public  class Tache_debarquement  extends Tache 
 { 
-	public Tache_embarquement(Agent a,Vol_depart v){
-		super(v.getHoraireDepart().retrait(new Duree(15)),v.getHoraireDepart().retrait(new Duree(5)),a,v);
-		this.setType("Embarquement");
+	public Tache_debarquement(Agent a,Vol_arrive v){
+		super(v.getHoraireArrive().retrait(new Duree(15)),v.getHoraireArrive().retrait(new Duree(5)),a,v);
+		this.setType("Débarquement");
 	}
-
-	//Attributes
-		
-		
-	
-	
-	//Attributes Association
 	
 	
 	
@@ -46,6 +40,6 @@ public  class Tache_embarquement  extends Tache
 	
 	
 
-} //End Class Tache_embarquement
+} //End Class Tache_debarquement
 
 

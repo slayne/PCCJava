@@ -1,7 +1,6 @@
-import java.util.Horaire;
+package aeroport;
 import java.util.HashMap;
 
-import aeroport.Horaire;
 
 /**************************************************************************
 * Source File	:  Tache.java

@@ -1,21 +1,23 @@
+package aeroport;
 /**************************************************************************
-* Source File	:  Vol_depart.java
+* Source File	:  Avion.java
 * Author                   :  DUMONT  
 * Project name         :  Non enregistré* Created                 :  03/03/2014
 * Modified   	:  04/03/2014
-* Description	:  Definition of the class Vol_depart
+* Description	:  Definition of the class Avion
 **************************************************************************/
 
 
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 
 
-public  class Vol_depart  extends Vol 
+public  class Avion  
 { 
 	//Inners Classifiers
 	
@@ -24,78 +26,82 @@ public  class Vol_depart  extends Vol
 		
 		
 	
-		private Horaire horaireDepart;
-		private String villeDepart;
-		private HashMap<String, Vol_depart> lesVolsDepart;
+		private String codeAvion;
+		private String modele;
+		private int capacite;
+		private static HashMap<String, Avion> lesAvions;
+	
+	//Attributes Association
+	
+		Vol lesVols[];
+	 
 		
+
 		
-		//Operations
-		
-		public Vol_depart(String cde, String cdeAvion, Horaire hor, String ville){
-			super(cde, cdeAvion);
-			horaireDepart = hor;
-			villeDepart = ville;
-			lesVolsDepart.put(cde, this);
+		public Avion(String cde, String mod, int cap){
+			
+			codeAvion = cde;
+			modele = mod;
+			capacite = cap;
+			lesAvions.put(codeAvion, this);
 			
 		}
-		
-		public Horaire getHoraireDepart(){
-			return horaireDepart;
+	
+		public int getCapacite(){
+			return capacite;
 		}
 		
-		public String getVille(){
-			return villeDepart;
+		public String getModele(){
+			return modele;
+		}
+		
+		public String getCodeAvion(){
+			return codeAvion;
 		}
 		
 		public String toString(){
-			return super.toString() + " " + horaireDepart + " "+ villeDepart;
+			return codeAvion + " " + modele + " " + capacite;
+			
 		}
 	
 		public void lesInstances()
 		{
-	
-			Collection<Vol_depart> col = lesVolsDepart.values();
+			Collection<Avion> col = lesAvions.values();
 			Iterator it = col.iterator();
 			while(it.hasNext()){
-				System.out.println((Vol_depart)it.next());
+				System.out.println((Avion)it.next());
 			}
+			
 	
 		}
 		
-		
-		public static void creerTouslesVolsDepart(String cheminFichier) throws IOException{
+		public static void creerTouslesAvions(String cheminFichier) throws IOException{
 			
 			 BufferedReader entree = new BufferedReader(new FileReader(cheminFichier));
 			 String ligne;
 			 StringTokenizer mots;
-			 String mot, cde = "null", ville = "null", cdeAvion = "null" ;
+			 String mot, cde = "null", mod = "null";
 			 int cap=0; 
-			 int heure = 0;
-			 int minute = 0;
 			 
 			 while ((ligne = entree.readLine()) != null) // boucle de lecture/affichage du fichier
 		      {
 		    	 //System.out.println("ligne :" + ligne);
 		    	 mots = new StringTokenizer(ligne);
 		    	 
-		    	 for(int i=0; i<5;i++){
+		    	 for(int i=0; i<3;i++){
 		    		 mot = mots.nextToken();
 		    		 //System.out.println("Mot :" + mot);
 		    		 if(i==0){
 		    			 cde = mot;
 		    		 }else if(i==1) {
-		    			 heure = Integer.parseInt(mot);
+		    			 mod = mot;
 		    		 }else if(i==2){
-		    			minute =  Integer.parseInt(mot);
-		    		 }else if(i==3){
-			    		ville =  mot;
-		    		 }else if(i==4){
-			    			cdeAvion =  mot;
+		    			cap =  Integer.parseInt(mot);
 		    		 }
 		    	 
 		    	 }
 		    		
-		    	 new Vol_depart(cde, cdeAvion, new Horaire(heure, minute), ville);
+		    	 new Avion(cde, mod, cap);
 		    		 
 		      }
 			
@@ -105,6 +111,6 @@ public  class Vol_depart  extends Vol
 	
 	
 
-} //End Class Vol_depart
+} //End Class Avion
 
 
