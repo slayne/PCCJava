@@ -30,6 +30,10 @@ public  class Agent_temps_plein  extends Agent
 		lesAgentsTempsPlein.put(super.getCodeAgent(),this);
 	}
 	
+	public Agent_temps_plein() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public static void lesAgentsTempsPlein (String fichier) {
 		String chaine="";
 		//lecture du fichier texte	ligne par ligne

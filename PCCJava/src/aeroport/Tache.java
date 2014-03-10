@@ -105,6 +105,10 @@ public  abstract class Tache
 		public void setType(String type) {
 			this.type = type;
 		}
+		
+		public int getId(){
+			return this.idTache;
+		}
 }
 
 

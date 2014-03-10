@@ -30,7 +30,7 @@ public abstract class Vol
 	
 		private String lAvion;
 	 
-		private HashMap<Integer,Tache> lesTaches;
+		protected HashMap<Integer,Tache> lesTaches;
 	 
 		private HashMap<String, Vol> lesVols;
 		

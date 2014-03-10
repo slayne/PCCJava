@@ -37,6 +37,14 @@ public  class Vol_depart  extends Vol
 			horaireDepart = hor;
 			villeDepart = ville;
 			lesVolsDepart.put(cde, this);
+			int capa = Avion.getAvion(this.getLavion()).getCapacite()/90;
+			for(int i=0;i<capa;i++){
+				Tache_enregistrement t = new Tache_enregistrement(new Agent_temps_plein(), this);
+				lesTaches.put(t.getId(), t);
+			}
+			
+			Tache_embarquement t = new Tache_embarquement(new Agent_temps_plein(), this);
+			lesTaches.put(t.getId(),t);
 			
 		}
 		

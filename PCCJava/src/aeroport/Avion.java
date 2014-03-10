@@ -63,6 +63,10 @@ public  class Avion
 			return codeAvion + " " + modele + " " + capacite;
 			
 		}
+		
+		public static Avion getAvion(String s){
+			return lesAvions.get(s);
+		}
 	
 		public void lesInstances()
 		{

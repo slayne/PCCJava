@@ -36,6 +36,8 @@ import java.util.*;
 				horaireArrive = hor;
 				villeDarrive = ville;
 				lesVolsArrives.put(cde, this);
+				Tache_debarquement t = new Tache_debarquement(new Agent_temps_plein(), this);
+				lesTaches.put(t.getId(),t);
 				
 			}
 			

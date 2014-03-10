@@ -10,6 +10,7 @@ package aeroport;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 import java.util.Hashtable;
 import java.util.regex.Pattern;
@@ -24,7 +25,7 @@ public abstract class Agent
 	private String nom;
 	private String prenom;
 	private int codeCycle;
-	private Vector lesTaches;
+	private HashMap<Integer,Tache> lesTaches;
 	private static Hashtable <String,Agent> lesAgents;
 	
 	//Operations
@@ -35,6 +36,13 @@ public abstract class Agent
 			prenom=p;
 			codeCycle=c;
 			lesAgents.put(codeAgent,this);
+		}
+		
+		public Agent(){
+			codeAgent=new String();
+			nom=new String();
+			prenom=new String();
+			
 		}
 		
 		public abstract TrancheHoraire calculTrancheHoraire(int numSemaine);
@@ -57,7 +65,7 @@ public abstract class Agent
 		}
 		
 		public void addTache (Tache t) {
-			lesTaches.add(t);
+			lesTaches.put(t.getId(),t);
 		}
 		
 		public void resetTache () {
@@ -65,7 +73,7 @@ public abstract class Agent
 		}
 		
 		public int getNbTaches () {
-			return lesTaches.capacity();
+			return lesTaches.size();
 		}
 		
 		public int getCodeCycle () {
