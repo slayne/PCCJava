@@ -77,6 +77,22 @@ public  class Agent_temps_plein  extends Agent
 		return t;
 		
 	}
+	
+	public boolean peutFaireRepas(Tache t){
+		boolean res=false;
+		
+	// faire toutes les conditions
+		if(t.chevauche(new TrancheHoraire(new Horaire(11, 30), new Horaire(14,00)))){
+			//est ce que si on ajoute la tranche horaire qu'on tente de lui affecter respect 2 conditions ?
+			// 1 : Il a 1h pour manger (début du repas entre 11h30 et 14h, peut terminer plus tard)
+			// 2: La fin de son travail se termine 1h après au minimum (ex:si il fini à 15h, il doit manger au plus tard à 14)
+		}
+		
+		
+		return res;
+	}
+	
+	
 
 
 } //End Class Agent_temps_plein

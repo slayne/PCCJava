@@ -20,7 +20,7 @@ import java.io.*;
 public abstract class Agent  
 { 
 	//Attributes
-	
+	public static final int NUM_SEM=3;
 	private String codeAgent;
 	private String nom;
 	private String prenom;
@@ -79,8 +79,28 @@ public abstract class Agent
 		public int getCodeCycle () {
 			return codeCycle;
 		}
-
-
+		
+		/*
+		 * @return un agent disponible pour le creneau indiqué en paramètre
+		 */
+		public static Agent estDispoA(TrancheHoraire tr){
+			//	Duree d=tr.getDuree();
+				for(Agent a : lesAgents.values()){
+					for(Tache t : a.lesTaches.values()){
+						if (!t.chevauche(tr)&& a.estEnFonction(tr) && a.peutFaireRepas(t)){
+							return a;
+						}
+					}
+				}
+				return null;
+			}
+			
+			public boolean estEnFonction(TrancheHoraire tr){
+				
+				return this.calculTrancheHoraire(NUM_SEM).contient(tr);
+			}
+			public abstract boolean peutFaireRepas(Tache t);
+			
 } //End Class Agent
 
 

@@ -135,6 +135,23 @@ public  abstract class Tache  implements Comparable<Tache>
 			return l;
 		}
 		
+		public boolean chevauche(TrancheHoraire tr){
+			boolean res=false;
+			if (tranche.intersection(tr)!=null){
+				res=true;
+			}
+			return res;
+		}
+		
+		public static void affecterTachesVol(){
+			for(Tache t : lesTaches.values()){
+				Agent a = Agent.estDispoA(t.tranche);
+				if (a!=null){
+					t.setAgent(a);
+					a.addTache(t);
+				}
+			}
+		}
 }	
 
 
