@@ -26,6 +26,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		private int idTache;
 		private TrancheHoraire tranche;
 		private String type;
+		//private Boolean estAffectee;
 		
 		private static int ident=0;
 		private static HashMap<Integer,Tache> lesTaches;
@@ -34,6 +35,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		Vol leVol;
 
 	    public Tache(){
+	    	//estAffectee = false;
 	    	sethoraireDebut(new Horaire());
 	    	sethoraireFin(new Horaire());
 	    	idTache=ident;
@@ -48,6 +50,7 @@ public  abstract class Tache  implements Comparable<Tache>
 	    	return("Tache : "+idTache+"Type : "+this.getType()+"\n"+tranche.toString()+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString());
 	    }
 	    public Tache(Horaire dd,Horaire df,Agent a,Vol v){
+	    	//estAffectee = false;
 	    	sethoraireDebut(dd);
 	    	sethoraireFin(df);
 	    	idTache=ident;
@@ -62,6 +65,13 @@ public  abstract class Tache  implements Comparable<Tache>
 				System.out.println(t.toString());
 			}
 		}
+		/*public Boolean estAffectee(){
+			return estAffectee;
+		}
+		
+		public void setAffectation(Boolean b){
+			estAffectee = b;
+		}*/
 		
 		public void afficher(){
 			System.out.println(this.toString());
