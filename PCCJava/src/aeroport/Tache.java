@@ -1,4 +1,9 @@
 package aeroport;
+
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 
@@ -15,7 +20,7 @@ import java.util.HashMap;
 
 
 
-public  abstract class Tache  
+public  abstract class Tache  implements Comparable<Tache>
 { 
 	
 		private int idTache;
@@ -109,6 +114,17 @@ public  abstract class Tache
 		public int getId(){
 			return this.idTache;
 		}
-}
+		
+		public int compareTo(Tache t){
+			return tranche.getDebutTrancheHoraire().compareTo(t.tranche.getDebutTrancheHoraire());
+		}
+		
+		public ArrayList<Tache> getTachesTriees(){
+			ArrayList<Tache> l =new ArrayList<Tache>(lesTaches.values());
+			Collections.sort(l);
+			return l;
+		}
+		
+}	
 
 
