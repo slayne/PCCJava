@@ -25,7 +25,7 @@ public abstract class Agent
 	private String nom;
 	private String prenom;
 	private int codeCycle;
-	private HashMap<Integer,Tache> lesTaches;
+	protected HashMap<Integer,Tache> lesTaches;
 	private static Hashtable <String,Agent> lesAgents;
 	
 	//Operations
@@ -81,7 +81,7 @@ public abstract class Agent
 		}
 		
 		/*
-		 * @return un agent disponible pour le creneau indiqué en paramètre
+		 * @return un agent disponible pour le creneau indiquï¿½ en paramï¿½tre
 		 */
 		public static Agent estDispoA(TrancheHoraire tr){
 			//	Duree d=tr.getDuree();

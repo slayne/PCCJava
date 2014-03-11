@@ -74,6 +74,12 @@ public  class Agent_mi_temps  extends Agent
 		return t;
 		
 	}
+
+	@Override
+	public boolean peutFaireRepas(Tache t) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 		
 	
 	

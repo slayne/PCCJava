@@ -79,16 +79,31 @@ public  class Agent_temps_plein  extends Agent
 	}
 	
 	public boolean peutFaireRepas(Tache t){
-		boolean res=false;
+		boolean res=true;
 		
 	// faire toutes les conditions
 		if(t.chevauche(new TrancheHoraire(new Horaire(11, 30), new Horaire(14,00)))){
 			//est ce que si on ajoute la tranche horaire qu'on tente de lui affecter respect 2 conditions ?
-			// 1 : Il a 1h pour manger (début du repas entre 11h30 et 14h, peut terminer plus tard)
-			// 2: La fin de son travail se termine 1h après au minimum (ex:si il fini à 15h, il doit manger au plus tard à 14)
+			// 1 : Il a 1h pour manger (dï¿½but du repas entre 11h30 et 14h, peut terminer plus tard)
+			// 2: La fin de son travail se termine 1h aprï¿½s au minimum (ex:si il fini ï¿½ 15h, il doit manger au plus tard ï¿½ 14)
+			
+		
+			Horaire horFin = new ArrayList<Tache>(this.lesTaches.values()).get(this.lesTaches.size()-1).gethoraireFin();
+			horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durÃ©e tache
+			
+			if(horFin.compareTo(new Horaire (14,0))>= 0){
+				// cas ou l'agent n'a pas le temps de faire la pause repas
+				res= false;
+			}
+			else if(horFin.ajout(new Duree(60)).compareTo(this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire()) <=0){
+				// cas ou pas le temps de faire pause repas avant dÃ©bauche
+				res= false;				
+				
+				
+			}
+			//sinon il faire le repas
+		
 		}
-		
-		
 		return res;
 	}
 	
