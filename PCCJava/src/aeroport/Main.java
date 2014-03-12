@@ -12,11 +12,11 @@ public class Main {
 		
 		
 		// Variables .... 
-		String Favions = "C:/Users/clement.notnull/Google Drive/L3_Miage/Semestre 6/[Java] Projet PCC/ProjetJava-FI-2014/DonneesProjet/avions14-v1.txt";
-		String FagentsMitemps = "C:/Users/clement.notnull/Google Drive/L3_Miage/Semestre 6/[Java] Projet PCC/ProjetJava-FI-2014/DonneesProjet/AgentsMiTemps-14-v1.txt";
-		String FagentsTempsPlein = "C:/Users/clement.notnull/Google Drive/L3_Miage/Semestre 6/[Java] Projet PCC/ProjetJava-FI-2014/DonneesProjet/AgentsTempsPlein-14-v1.txt";
-		String FvolA = "C:/Users/clement.notnull/Google Drive/L3_Miage/Semestre 6/[Java] Projet PCC/ProjetJava-FI-2014/DonneesProjet/ProgrammeVolsArrivees14-v2.txt";
-		String FvolB = "C:/Users/clement.notnull/Google Drive/L3_Miage/Semestre 6/[Java] Projet PCC/ProjetJava-FI-2014/DonneesProjet/ProgrammeVolsDeparts14-v2.txt";
+		String Favions = "avions14-v1.txt";
+		String FagentsMitemps = "AgentsMiTemps-14-v1.txt";
+		String FagentsTempsPlein = "AgentsTempsPlein-14-v1.txt";
+		String FvolA = "ProgrammeVolsArrivees14-v2.txt";
+		String FvolB = "ProgrammeVolsDeparts14-v2.txt";
 		
 		
 		HashMap<String, Avion> tousLesAvions = new HashMap<String, Avion>(); //HashMap de tous les avions
@@ -30,10 +30,10 @@ public class Main {
 			tousLesAvions = Avion.getLesAvions();
 			System.out.println("Nombre d'avions : " +tousLesAvions.size());
 			
-			//Création des agents
+			/*//Création des agents
 			Agent.creerTouslesAgents(FagentsMitemps, FagentsTempsPlein);
 			tousLesAgents = Avion.getLesAgents();
-			System.out.println("Nombre d'agents : " +tousLesAgents.size());
+			System.out.println("Nombre d'agents : " +tousLesAgents.size());*/
 			
 			
 			
