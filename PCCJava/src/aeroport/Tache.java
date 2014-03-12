@@ -29,7 +29,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		//private Boolean estAffectee;
 		
 		private static int ident=0;
-		private static HashMap<Integer,Tache> lesTaches;
+		private static HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
 		//Attributes Association
 		Agent lAgent;
 		Vol leVol;
@@ -51,8 +51,7 @@ public  abstract class Tache  implements Comparable<Tache>
 	    }
 	    public Tache(Horaire dd,Horaire df,Agent a,Vol v){
 	    	//estAffectee = false;
-	    	sethoraireDebut(dd);
-	    	sethoraireFin(df);
+	    	tranche = new TrancheHoraire(dd, df);
 	    	idTache=ident;
 	    	lAgent=a;
 	    	leVol=v;
@@ -82,7 +81,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		}
 
 		public void sethoraireFin(Horaire hf) {
-			this.tranche.setFinTrancheHoraire(hf);
+			tranche.setFinTrancheHoraire(hf);
 		}
 
 		public Horaire gethoraireDebut() {
@@ -153,6 +152,11 @@ public  abstract class Tache  implements Comparable<Tache>
 			}
 		}
 		
+		public static HashMap<Integer,Tache> toutesLesTaches(){
+			return lesTaches;
+		}
+		
+
 }	
 
 

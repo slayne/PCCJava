@@ -36,6 +36,9 @@ public class Main {
 			tousLesVols = Vol.getLesVols();
 			System.out.println("Nombre de vols : " +tousLesVols.size());
 			
+			//Affichage du nombre de taches
+			System.out.println("Nombre de taches :" + Tache.toutesLesTaches().size());
+			
 			//Création des agents
 			Agent.creerTouslesAgents(FagentsMitemps, FagentsTempsPlein);
 			tousLesAgents = Agent.getLesAgents();

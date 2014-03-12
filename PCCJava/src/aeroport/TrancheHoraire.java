@@ -100,7 +100,7 @@ public void setFinTrancheHoraire(Horaire hf) {
 }
 
 public void setDebutTrancheHoraire(Horaire d){
-	debut=d;
+	debut= d;
 }
 
 }
