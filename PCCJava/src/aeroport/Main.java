@@ -16,33 +16,35 @@ public class Main {
 		String FagentsMitemps = "AgentsMiTemps-14-v1.txt";
 		String FagentsTempsPlein = "AgentsTempsPlein-14-v1.txt";
 		String FvolA = "ProgrammeVolsArrivees14-v2.txt";
-		String FvolB = "ProgrammeVolsDeparts14-v2.txt";
+		String FvolD = "ProgrammeVolsDeparts14-v2.txt";
 		
 		
 		HashMap<String, Avion> tousLesAvions = new HashMap<String, Avion>(); //HashMap de tous les avions
 		HashMap<String, Agent> tousLesAgents = new HashMap<String, Agent>(); //HashMap de tous les agents
+		HashMap<String, Vol> tousLesVols = new HashMap<String, Vol>(); //HashMap de tous les Vols
 		
 		
 		
 		try {
-			// Création des vols
+			// Création des avions
 			Avion.creerTouslesAvions(Favions);
 			tousLesAvions = Avion.getLesAvions();
 			System.out.println("Nombre d'avions : " +tousLesAvions.size());
 			
-			/*//Création des agents
+			//Création des vols
+			Vol.creerTousLesVols(FvolA, FvolD);
+			tousLesVols = Vol.getLesVols();
+			System.out.println("Nombre de vols : " +tousLesVols.size());
+			
+			//Création des agents
 			Agent.creerTouslesAgents(FagentsMitemps, FagentsTempsPlein);
-			tousLesAgents = Avion.getLesAgents();
-			System.out.println("Nombre d'agents : " +tousLesAgents.size());*/
-			
-			
+			tousLesAgents = Agent.getLesAgents();
+			System.out.println("Nombre d'agents : " +tousLesAgents.size());
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 		
 		
 		//Affectation des taches

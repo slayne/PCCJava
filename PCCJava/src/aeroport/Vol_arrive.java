@@ -27,13 +27,13 @@ import java.util.*;
 		
 			private Horaire horaireArrive;
 			private String villeDarrive;
-			private HashMap<String, Vol_arrive> lesVolsArrives;
+			private static HashMap<String, Vol_arrive> lesVolsArrives = new HashMap<String, Vol_arrive>();
 		
 		
 			//Operations
-			public Vol_arrive(String cde, String cdeAvion, Horaire hor, String ville){
+			public Vol_arrive(String cde, String cdeAvion, int heure, int minute, String ville){
 				super(cde, cdeAvion);
-				horaireArrive = hor;
+				horaireArrive = new Horaire(heure, minute);
 				villeDarrive = ville;
 				lesVolsArrives.put(cde, this);
 				Tache_debarquement t = new Tache_debarquement(new Agent_temps_plein(), this);
@@ -80,25 +80,19 @@ import java.util.*;
 			    	 //System.out.println("ligne :" + ligne);
 			    	 mots = new StringTokenizer(ligne);
 			    	 
-			    	 for(int i=0; i<5;i++){
-			    		 mot = mots.nextToken();
-			    		 //System.out.println("Mot :" + mot);
-			    		 if(i==0){
-			    			 cde = mot;
-			    		 }else if(i==1) {
-			    			 heure = Integer.parseInt(mot);
-			    		 }else if(i==2){
-			    			minute =  Integer.parseInt(mot);
-			    		 }else if(i==3){
-				    		ville =  mot;
-			    		 }else if(i==4){
-				    			cdeAvion =  mot;
-			    		 }
+			    		mot = mots.nextToken();
+			    		cde = mot;
+			    		mot = mots.nextToken();
+			    		heure = Integer.parseInt(mot);
+			    		mot = mots.nextToken();
+			    		minute =  Integer.parseInt(mot);
+			    		mot = mots.nextToken();
+			    		ville =  mot;
+			    		mot = mots.nextToken();
+				    	cdeAvion =  mot;
+				    
+			    	 new Vol_arrive(cde, cdeAvion, heure, minute, ville);
 			    	 
-			    	 }
-			    		
-			    	 new Vol_arrive(cde, cdeAvion, new Horaire(heure, minute), ville);
-			    		 
 			      }
 				
 			}

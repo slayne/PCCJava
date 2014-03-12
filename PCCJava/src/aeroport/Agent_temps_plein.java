@@ -10,49 +10,67 @@
 	
 	
 	import java.io.BufferedReader;
-	import java.io.File;
-	import java.io.FileInputStream;
-	import java.io.InputStream;
-	import java.io.InputStreamReader;
-	import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 	
 	
 	public  class Agent_temps_plein  extends Agent 
 	{ 
 	
 		//Attributes
-		private static HashMap <String,Agent_temps_plein> lesAgentsTempsPlein;
+		private int codeCycle;
+		private static HashMap <String,Agent_temps_plein> lesAgentsTempsPlein = new HashMap <String,Agent_temps_plein>();
 		
 		//Operations
 			
-		public Agent_temps_plein (String id, String n, String p, int c) {
-			super(id,n,p,c);
-			lesAgentsTempsPlein.put(super.getCodeAgent(),this);
+		public Agent_temps_plein (String cde, String n, String p, int c) {
+			super(cde,n,p,c);
+			lesAgentsTempsPlein.put(cde,this);
 		}
 		
 		public Agent_temps_plein() {
 			// TODO Auto-generated constructor stub
+			super();
 		}
 	
-		public static void lesAgentsTempsPlein (String fichier) {
-			String chaine="";
-			//lecture du fichier texte	ligne par ligne
-			try{
-				InputStream ips=new FileInputStream(fichier); 
-				InputStreamReader ipsr=new InputStreamReader(ips);
-				BufferedReader br=new BufferedReader(ipsr);
-				String ligne;
-				String valeurs [];
-				Agent_temps_plein temp;
-				while ((ligne=br.readLine())!=null){
-					valeurs=ligne.split(" "); // Recuperation des termes de la ligne dans un tableau de string
-					temp = new Agent_temps_plein(valeurs[0],valeurs[1],valeurs[2],Integer.parseInt(valeurs[3]));
-				}
-				br.close(); 
-			}		
-			catch (Exception e){
-				System.out.println(e.toString());
-			}
+		public static void creerlesAgentsTempsPlein (String fichier) throws NumberFormatException, IOException {
+			BufferedReader entree = new BufferedReader(new FileReader(fichier));
+			 String ligne;
+			 StringTokenizer mots;
+			 String mot, cde = "null", nom = "null", prenom = "null";
+			 int cycle=0; 
+			 
+			 while ((ligne = entree.readLine()) != null) // boucle de lecture/affichage du fichier
+		      {
+		    	 //System.out.println("ligne :" + ligne);
+		    	 mots = new StringTokenizer(ligne);
+		    	//System.out.println(ligne);
+			    		 mot = mots.nextToken();
+			    		 cde = mot;
+			    		 mot = mots.nextToken();
+			    		 nom = mot;
+			    		 mot = mots.nextToken();
+			    		 prenom = mot;
+			    		 mot = mots.nextToken();
+			    		 cycle =  Integer.parseInt(mot);			    	 
+			    	 
+			    		
+			    new Agent_temps_plein(cde, nom, prenom, cycle);
+			    	
+		    		 
+		      }
+			
+		}
+		
+		
+		public String toString(){
+			return "Agent temps plein :" + super.toString();
+			
 		}
 		
 		public TrancheHoraire calculTrancheHoraire(int numSemaine) {
@@ -85,11 +103,11 @@
 			if(t.chevauche(new TrancheHoraire(new Horaire(11, 30), new Horaire(14,00)))){
 				//est ce que si on ajoute la tranche horaire qu'on tente de lui affecter respect 2 conditions ?
 				// 1 : Il a 1h pour manger (dï¿½but du repas entre 11h30 et 14h, peut terminer plus tard)
-				// 2: La fin de son travail se termine 1h aprés au minimum (ex:si il fini ï¿½ 15h, il doit manger au plus tard ï¿½ 14)
+				// 2: La fin de son travail se termine 1h aprï¿½s au minimum (ex:si il fini ï¿½ 15h, il doit manger au plus tard ï¿½ 14)
 				
 			try{
 				Horaire horFin = new ArrayList<Tache>(this.lesTaches.values()).get(this.lesTaches.size()-1).gethoraireFin();
-				horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durÃ©e tache sert pour quand on commence à 13h30
+				horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durÃ©e tache sert pour quand on commence ï¿½ 13h30
 			
 				
 					if(horFin.compareTo(new Horaire (14,0))>= 0){

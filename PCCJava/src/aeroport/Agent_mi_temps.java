@@ -11,6 +11,9 @@ package aeroport;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -21,51 +24,70 @@ public  class Agent_mi_temps  extends Agent
 { 
 
 	//Attributes
-	private static Hashtable <String,Agent_mi_temps> lesAgentsMiTemps;
-	
+	private static HashMap <String,Agent_mi_temps> lesAgentsMiTemps = new HashMap <String,Agent_mi_temps>();
+
 	//Operations
 	
-	public Agent_mi_temps (String id, String n, String p, int c) {
-		super(id,n,p,c);
-		lesAgentsMiTemps.put(super.getCodeAgent(),this);
+	public Agent_mi_temps (String cde, String n, String p, int c) {
+		super(cde,n,p,c);
+		lesAgentsMiTemps.put(cde,this);
 	}
 	
-	public static void lesAgentsMiTemps(String fichier) {
-		String chaine="";
-		//lecture du fichier texte	ligne par ligne
-		try{
-			InputStream ips=new FileInputStream(fichier); 
-			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
-			String ligne;
-			String valeurs [];
-			Agent_mi_temps temp;
-			while ((ligne=br.readLine())!=null){
-				valeurs=ligne.split(" "); // Recuperation des termes de la ligne dans un tableau de string
-				temp = new Agent_mi_temps(valeurs[0],valeurs[1],valeurs[2],Integer.parseInt(valeurs[3]));
-			}
-			br.close(); 
-		}		
-		catch (Exception e){
-			System.out.println(e.toString());
-		}
+	public Agent_mi_temps () {
+		super();
+		
 	}
+
+	
+	public static void creerlesAgentsMiTemps(String fichier) throws NumberFormatException, IOException {
+		
+		 BufferedReader entree = new BufferedReader(new FileReader(fichier));
+		 String ligne;
+		 StringTokenizer mots;
+		 String mot, cde = "null", nom = "null", prenom = "null";
+		 int cycle=0; 
+		 
+		 while ((ligne = entree.readLine()) != null) // boucle de lecture/affichage du fichier
+	      {
+	    	 //System.out.println("ligne :" + ligne);
+	    	 mots = new StringTokenizer(ligne);
+	    	//System.out.println(ligne);
+		    		 mot = mots.nextToken();
+		    		 cde = mot;
+		    		 mot = mots.nextToken();
+		    		 nom = mot;
+		    		 mot = mots.nextToken();
+		    		 prenom = mot;
+		    		 mot = mots.nextToken();
+		    		 cycle =  Integer.parseInt(mot);			    	 
+		    	 
+		    		
+		    new Agent_mi_temps(cde, nom, prenom, cycle);
+	      }
+	}
+	
+	
+	public String toString(){
+		return "Agent mi temps :" + super.toString();
+		
+	}
+	
 	
 	public TrancheHoraire calculTrancheHoraire(int numSemaine) {
 		Horaire deb = null;
 		Horaire fin = null;
 		
-		if((super.getCodeCycle()==1 && numSemaine%3==1) || (super.getCodeCycle()==2 && numSemaine%3==2) || (super.getCodeCycle()==3 && numSemaine%3==0)) {
+		if((getCodeCycle()==1 && numSemaine%3==1) || (getCodeCycle()==2 && numSemaine%3==2) || (getCodeCycle()==3 && numSemaine%3==0)) {
 			// horaire normale
 			deb = new Horaire(9,0);
 			fin = new Horaire(12,30);
 		}
-		if((super.getCodeCycle()==1 && numSemaine%1==2) || (super.getCodeCycle()==2 && numSemaine%3==0) || (super.getCodeCycle()==3 && numSemaine%3==1)) {
+		if((getCodeCycle()==1 && numSemaine%1==2) || (getCodeCycle()==2 && numSemaine%3==0) || (getCodeCycle()==3 && numSemaine%3==1)) {
 			// horaire matin
 			deb = new Horaire(5,30);
 			fin = new Horaire(9,0);
 		}
-		if((super.getCodeCycle()==1 && numSemaine%3==0) || (super.getCodeCycle()==2 && numSemaine%3==1) || (super.getCodeCycle()==3 && numSemaine%3==2)) {
+		if((getCodeCycle()==1 && numSemaine%3==0) || (getCodeCycle()==2 && numSemaine%3==1) || (getCodeCycle()==3 && numSemaine%3==2)) {
 			// horaire soir
 			deb = new Horaire(20,0);
 			fin = new Horaire(23,30);

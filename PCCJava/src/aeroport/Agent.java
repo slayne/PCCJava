@@ -26,32 +26,30 @@ public abstract class Agent
 	private String nom;
 	private String prenom;
 	private int codeCycle;
-	protected HashMap<Integer,Tache> lesTaches;
-	private static Hashtable <String,Agent> lesAgents;
+
+	protected HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
+	private static HashMap <String,Agent> lesAgents = new HashMap <String,Agent>();
 	
 	//Operations
 		
-		public Agent (String id, String n, String p, int c) {
-			codeAgent=id;
+		public Agent (String cde, String n, String p, int c) {
+			codeAgent=cde;
 			nom=n;
 			prenom=p;
-			codeCycle=c;
-			lesAgents.put(codeAgent,this);
+			codeCycle = c;
+			lesAgents.put(cde,this);
 		}
 		
 		public Agent(){
-			codeAgent=new String();
-			nom=new String();
-			prenom=new String();
+			codeAgent=null;
+			nom=null;
+			prenom=null;
+			codeCycle =0;
 			
 		}
 		
 		public abstract TrancheHoraire calculTrancheHoraire(int numSemaine);
 		
-		public static void lesAgents(String tp, String mt) {
-			Agent_temps_plein.lesAgentsTempsPlein(tp);
-			Agent_mi_temps.lesAgentsMiTemps(mt);
-		}
 		
 		public static void resetAgent () {
 			lesAgents.clear();
@@ -77,9 +75,10 @@ public abstract class Agent
 			return lesTaches.size();
 		}
 		
-		public int getCodeCycle () {
+		public int getCodeCycle(){
 			return codeCycle;
 		}
+		
 		
 		/*
 		 * @return un agent disponible pour le creneau indiquï¿½ en paramï¿½tre
@@ -104,11 +103,11 @@ public abstract class Agent
 		
 		public ArrayList<TrancheHoraire> getTranchesLibres(){
 			ArrayList<TrancheHoraire> liste = new ArrayList<TrancheHoraire>();
-			Horaire lasthorairefin=this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire(); // Horaire fin de la tache précédente
+			Horaire lasthorairefin=this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire(); // Horaire fin de la tache prï¿½cï¿½dente
 			// On parcours les taches de l'agent pour trouver tous les trous
 			for(Tache t : this.lesTaches.values()){
 				if(!t.gethoraireDebut().equals(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire()) && t.gethoraireDebut().horaireEnMinutes() - this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().horaireEnMinutes() >=30 ){
-					//Si la premiere tache ne commence pas à son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
+					//Si la premiere tache ne commence pas ï¿½ son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
 					liste.add(new TrancheHoraire(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire(), t.gethoraireDebut()));
 				}
 				if(t.gethoraireDebut().horaireEnMinutes() - lasthorairefin.horaireEnMinutes()>=30){
@@ -116,7 +115,7 @@ public abstract class Agent
 					liste.add(new TrancheHoraire(lasthorairefin, t.gethoraireDebut()));
 				}
 				if(this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire().horaireEnMinutes()-t.gethoraireFin().horaireEnMinutes()>=30){
-					//si le temps entre la fin de la tahce courante et l'horaire de débauche est plus grand que 30mn on ajoute
+					//si le temps entre la fin de la tahce courante et l'horaire de dï¿½bauche est plus grand que 30mn on ajoute
 					liste.add(new TrancheHoraire(t.gethoraireFin(), this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire()));
 				}
 				lasthorairefin=t.gethoraireFin();
@@ -135,10 +134,22 @@ public abstract class Agent
 		
 		public static void construirePlanning(){
 			Tache.affecterTachesVol();
+			//Agent.affecterTacheRepas();
 			Agent.affecterTacheAccueil();
 		}
 			
+		public static void creerTouslesAgents(String FagentsMitemps, String FagentsTempsPlein) throws NumberFormatException, IOException{
+			Agent_temps_plein.creerlesAgentsTempsPlein(FagentsTempsPlein);
+			Agent_mi_temps.creerlesAgentsMiTemps(FagentsMitemps);
+		}
 		
+		public static HashMap<String, Agent> getLesAgents(){
+			return lesAgents;
+		}
+		
+		public String toString(){
+			return codeAgent + " " + nom + " " + prenom + " " + codeCycle;
+		}
 			
 } //End Class Agent
 

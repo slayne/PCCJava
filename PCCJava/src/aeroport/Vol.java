@@ -30,9 +30,8 @@ public abstract class Vol
 	
 		private String lAvion;
 	 
-		protected HashMap<Integer,Tache> lesTaches;
-	 
-		private HashMap<String, Vol> lesVols;
+		protected HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
+		private static HashMap<String, Vol> lesVols= new HashMap<String, Vol>();
 		
 		
 		public Vol(String cde, String cdeAvion){
@@ -40,6 +39,7 @@ public abstract class Vol
 			codeVol = cde;
 			lAvion = cdeAvion;
 			lesVols.put(codeVol, this);
+			
 			
 		}
 	
@@ -55,6 +55,11 @@ public abstract class Vol
 			return codeVol;
 		}
 		
+		public static HashMap<String, Vol> getLesVols(){
+			return lesVols;
+		}
+		
+
 		
 		public String toString(){
 			return codeVol;

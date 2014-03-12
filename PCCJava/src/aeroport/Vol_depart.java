@@ -27,24 +27,26 @@ public  class Vol_depart  extends Vol
 	
 		private Horaire horaireDepart;
 		private String villeDepart;
-		private HashMap<String, Vol_depart> lesVolsDepart;
+		private static HashMap<String, Vol_depart> lesVolsDepart = new HashMap<String, Vol_depart>();
 		
 		
 		//Operations
 		
-		public Vol_depart(String cde, String cdeAvion, Horaire hor, String ville){
+		public Vol_depart(String cde, String cdeAvion, int heure, int minute, String ville){
 			super(cde, cdeAvion);
-			horaireDepart = hor;
+			horaireDepart = new Horaire(heure, minute);
 			villeDepart = ville;
 			lesVolsDepart.put(cde, this);
 			int capa = Avion.getAvion(this.getLavion()).getCapacite()/90;
-			for(int i=0;i<capa;i++){
+			
+			System.out.println("il manque les tache depart");
+			/*for(int i=0;i<capa;i++){
 				Tache_enregistrement t = new Tache_enregistrement(new Agent_temps_plein(), this);
 				lesTaches.put(t.getId(), t);
 			}
 			
-			Tache_embarquement t = new Tache_embarquement(new Agent_temps_plein(), this);
-			lesTaches.put(t.getId(),t);
+			//Tache_embarquement t = new Tache_embarquement(new Agent_temps_plein(), this);
+			//lesTaches.put(t.getId(),t);*/
 			
 		}
 		
@@ -87,25 +89,19 @@ public  class Vol_depart  extends Vol
 		    	 //System.out.println("ligne :" + ligne);
 		    	 mots = new StringTokenizer(ligne);
 		    	 
-		    	 for(int i=0; i<5;i++){
-		    		 mot = mots.nextToken();
-		    		 //System.out.println("Mot :" + mot);
-		    		 if(i==0){
-		    			 cde = mot;
-		    		 }else if(i==1) {
-		    			 heure = Integer.parseInt(mot);
-		    		 }else if(i==2){
-		    			minute =  Integer.parseInt(mot);
-		    		 }else if(i==3){
-			    		ville =  mot;
-		    		 }else if(i==4){
-			    			cdeAvion =  mot;
-		    		 }
-		    	 
-		    	 }
+		    		mot = mots.nextToken();
+		    		cde = mot;
+		    		mot = mots.nextToken();
+		    		heure = Integer.parseInt(mot);
+		    		mot = mots.nextToken();
+		    		minute =  Integer.parseInt(mot);
+		    		mot = mots.nextToken();
+		    		ville =  mot;
+		    		mot = mots.nextToken();
+			    	cdeAvion =  mot;
 		    		
-		    	 new Vol_depart(cde, cdeAvion, new Horaire(heure, minute), ville);
-		    		 
+		    	 new Vol_depart(cde, cdeAvion, heure, minute, ville);
+		    	 
 		      }
 			
 		}
