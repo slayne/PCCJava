@@ -29,7 +29,7 @@ public  class Avion
 		private String codeAvion;
 		private String modele;
 		private int capacite;
-		private static HashMap<String, Avion> lesAvions;
+		private static HashMap<String, Avion> lesAvions = new  HashMap<String, Avion>();
 	
 	//Attributes Association
 	
@@ -39,11 +39,12 @@ public  class Avion
 
 		
 		public Avion(String cde, String mod, int cap){
-			
+			//System.out.println("zlllllllllll");
 			codeAvion = cde;
 			modele = mod;
 			capacite = cap;
 			lesAvions.put(codeAvion, this);
+			
 			
 		}
 		
@@ -82,7 +83,7 @@ public  class Avion
 			return lesAvions;
 		}
 	
-		public void lesInstances()
+		public static void lesInstances()
 		{
 			Collection<Avion> col = lesAvions.values();
 			Iterator it = col.iterator();
@@ -105,23 +106,22 @@ public  class Avion
 		      {
 		    	 //System.out.println("ligne :" + ligne);
 		    	 mots = new StringTokenizer(ligne);
-		    	 
-		    	 for(int i=0; i<3;i++){
-		    		 mot = mots.nextToken();
-		    		 //System.out.println("Mot :" + mot);
-		    		 if(i==0){
-		    			 cde = mot;
-		    		 }else if(i==1) {
-		    			 mod = mot;
-		    		 }else if(i==2){
-		    			cap =  Integer.parseInt(mot);
-		    		 }
-		    	 
-		    	 }
-		    		
-		    	 new Avion(cde, mod, cap);
+		    	//System.out.println(ligne);
+			    		 mot = mots.nextToken();
+			    		 cde = mot;
+			    		 mot = mots.nextToken();
+			    		 mod = mot;
+			    		 mot = mots.nextToken();
+			    		 cap =  Integer.parseInt(mot);			    	 
+			    	 
+			    		
+			    	 new Avion(cde, mod, cap);
+			    	//System.out.println(a.toString());
+		 
+		    	
 		    		 
 		      }
+			
 			
 		}
 	
