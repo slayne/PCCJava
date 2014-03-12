@@ -46,6 +46,16 @@ public  class Avion
 			lesAvions.put(codeAvion, this);
 			
 		}
+		
+
+		public Avion(){
+			
+			codeAvion = null;
+			modele = null;
+			capacite = 0;
+			//lesAvions.put(codeAvion, this);
+			
+		}
 	
 		public int getCapacite(){
 			return capacite;
@@ -66,6 +76,10 @@ public  class Avion
 		
 		public static Avion getAvion(String s){
 			return lesAvions.get(s);
+		}
+		
+		public static HashMap<String, Avion> getLesAvions(){
+			return lesAvions;
 		}
 	
 		public void lesInstances()
