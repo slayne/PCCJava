@@ -21,7 +21,7 @@
 	{ 
 	
 		//Attributes
-		private static Hashtable <String,Agent_temps_plein> lesAgentsTempsPlein;
+		private static HashMap <String,Agent_temps_plein> lesAgentsTempsPlein;
 		
 		//Operations
 			
@@ -85,11 +85,11 @@
 			if(t.chevauche(new TrancheHoraire(new Horaire(11, 30), new Horaire(14,00)))){
 				//est ce que si on ajoute la tranche horaire qu'on tente de lui affecter respect 2 conditions ?
 				// 1 : Il a 1h pour manger (d�but du repas entre 11h30 et 14h, peut terminer plus tard)
-				// 2: La fin de son travail se termine 1h apr�s au minimum (ex:si il fini � 15h, il doit manger au plus tard � 14)
+				// 2: La fin de son travail se termine 1h apr�s au minimum (ex:si il fini � 15h, il doit manger au plus tard � 14)
 				
 			try{
 				Horaire horFin = new ArrayList<Tache>(this.lesTaches.values()).get(this.lesTaches.size()-1).gethoraireFin();
-				horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durée tache
+				horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durée tache sert pour quand on commence � 13h30
 			
 				
 					if(horFin.compareTo(new Horaire (14,0))>= 0){
@@ -116,10 +116,20 @@
 					// cas ou l'agent est en décalé soir, il doit donc commencer par manger
 														
 				}
-			}
-			
+			}	
 		}
 			return res;
+	}
+		
+	public static void affecterTachesRepas(){
+		for(Agent_temps_plein a : lesAgentsTempsPlein.values()){
+			for(TrancheHoraire tr  : a.getTranchesLibres()){
+				if(new TrancheHoraire(new Horaire(11,30),new Horaire(14,00)).contient(tr)){
+					a.addTache(new Tache_repas(tr.getDebutTrancheHoraire(), tr.getFinTrancheHoraire(), a));
+					break;
+				}
+			}
+		}
 	}
 		
 		

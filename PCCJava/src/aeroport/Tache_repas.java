@@ -15,23 +15,10 @@ import java.util.*;
 
 public  class Tache_repas  extends Tache 
 { 
-	//Inners Classifiers
-	//TODO
-
-	//Attributes
-		
-		
-	
-	
-	//Attributes Association
-	
-	
-	
-	
-	
-
-	
-	//Operations
+		public Tache_repas(Horaire dd, Horaire df, Agent a){
+			super(dd,df,a,null);
+			this.setType("Repas");
+		}
 	
 		public 
 	 void lesInstances()

@@ -15,8 +15,8 @@ import java.util.*;
 
 public  class Tache_accueil_Information  extends Tache 
 { 
-	public Tache_accueil_Information (String t,Horaire dd,Horaire df,Agent a,Vol v){
-		// TODO quand agent finis
+	public Tache_accueil_Information (Horaire dd,Horaire df,Agent a){
+		super(dd,df,a,null);
 		this.setType("Accueil-Information");
 	}
 	

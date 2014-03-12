@@ -9,6 +9,7 @@ package aeroport;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
@@ -95,11 +96,49 @@ public abstract class Agent
 				return null;
 			}
 			
-			public boolean estEnFonction(TrancheHoraire tr){
-				
-				return this.calculTrancheHoraire(NUM_SEM).contient(tr);
+		public boolean estEnFonction(TrancheHoraire tr){
+			
+			return this.calculTrancheHoraire(NUM_SEM).contient(tr);
+		}
+		public abstract boolean peutFaireRepas(Tache t);
+		
+		public ArrayList<TrancheHoraire> getTranchesLibres(){
+			ArrayList<TrancheHoraire> liste = new ArrayList<TrancheHoraire>();
+			Horaire lasthorairefin=this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire(); // Horaire fin de la tache précédente
+			// On parcours les taches de l'agent pour trouver tous les trous
+			for(Tache t : this.lesTaches.values()){
+				if(!t.gethoraireDebut().equals(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire()) && t.gethoraireDebut().horaireEnMinutes() - this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().horaireEnMinutes() >=30 ){
+					//Si la premiere tache ne commence pas à son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
+					liste.add(new TrancheHoraire(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire(), t.gethoraireDebut()));
+				}
+				if(t.gethoraireDebut().horaireEnMinutes() - lasthorairefin.horaireEnMinutes()>=30){
+					//si le temps entre la fin de la derniere tache et le debut de la tache courante >=30 minutes alors on ajoute la tranche
+					liste.add(new TrancheHoraire(lasthorairefin, t.gethoraireDebut()));
+				}
+				if(this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire().horaireEnMinutes()-t.gethoraireFin().horaireEnMinutes()>=30){
+					//si le temps entre la fin de la tahce courante et l'horaire de débauche est plus grand que 30mn on ajoute
+					liste.add(new TrancheHoraire(t.gethoraireFin(), this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire()));
+				}
+				lasthorairefin=t.gethoraireFin();
 			}
-			public abstract boolean peutFaireRepas(Tache t);
+			
+			return liste;
+		}
+		
+		public static void affecterTacheAccueil(){
+			for(Agent a : lesAgents.values()){
+				for(TrancheHoraire tr  : a.getTranchesLibres()){
+					a.addTache(new Tache_accueil_Information(tr.getDebutTrancheHoraire(),tr.getFinTrancheHoraire(),a));
+				}
+			}
+		}
+		
+		public static void construirePlanning(){
+			Tache.affecterTachesVol();
+			Agent.affecterTacheAccueil();
+		}
+			
+		
 			
 } //End Class Agent
 
