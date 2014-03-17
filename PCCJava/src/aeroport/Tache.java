@@ -144,14 +144,18 @@ public  abstract class Tache  implements Comparable<Tache>
 		}
 		
 		public static void affecterTachesVol(){
+			int i=0;
 			for(Tache t : lesTaches.values()){
 				Agent a = Agent.estDispoA(t.tranche);
 				if (a!=null){
 					//System.out.println("on affecte");
 					t.setAgent(a);
 					a.addTache(t);
+					i++;
+					System.out.println(i);
 				}
 			}
+			System.out.println("bla");
 		}
 		
 		public static HashMap<Integer,Tache> toutesLesTaches(){

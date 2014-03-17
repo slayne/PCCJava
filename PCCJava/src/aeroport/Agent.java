@@ -27,7 +27,7 @@ public abstract class Agent
 	private String prenom;
 	private int codeCycle;
 
-	protected static HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
+	protected  HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
 	private static HashMap <String,Agent> lesAgents = new HashMap <String,Agent>();
 	
 	//Operations
@@ -109,6 +109,8 @@ public abstract class Agent
 			ArrayList<TrancheHoraire> liste = new ArrayList<TrancheHoraire>();
 			Horaire lasthorairefin=this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire(); // Horaire fin de la tache pr�c�dente
 			// On parcours les taches de l'agent pour trouver tous les trous
+			System.out.println("------------------------");
+			System.out.println(lesTaches.size());
 			for(Tache t : this.lesTaches.values()){
 				if(!t.gethoraireDebut().equals(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire()) && t.gethoraireDebut().horaireEnMinutes() - this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().horaireEnMinutes() >=30 ){
 					//Si la premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
@@ -129,8 +131,12 @@ public abstract class Agent
 		}
 		
 		public static void affecterTacheAccueil(){
+			
 			for(Agent a : lesAgents.values()){
+				//System.out.println(a.toString());
+				int i=0;
 				for(TrancheHoraire tr  : a.getTranchesLibres()){
+					//System.out.println(i);i++;
 					a.addTache(new Tache_accueil_Information(tr.getDebutTrancheHoraire(),tr.getFinTrancheHoraire(),a));
 				}
 			}
@@ -138,6 +144,7 @@ public abstract class Agent
 		
 		public static void construirePlanning(){
 			Tache.affecterTachesVol();
+			System.out.println("tet");
 			//Agent_temps_plein.affecterTachesRepas();
 			Agent.affecterTacheAccueil();
 		}
@@ -170,15 +177,15 @@ public abstract class Agent
 			}
 		}
 		
-		public static void afficherListeTachesUnAgent(String codeA){
+	/*	public static void afficherListeTachesUnAgent(String codeA){
 			
 			System.out.println("Liste des taches de l'agent : " + codeA);
-			for(Tache t : lesTaches.values()){
+			for(Tache t : .lesTaches.values()){
 				if(t.getAgent().getCodeAgent().equals(codeA)){
 					System.out.println(t.toString());
 				}
 			}
-		}
+		}*/
 		
 			
 } //End Class Agent
