@@ -150,6 +150,10 @@ public abstract class Agent
 		public String toString(){
 			return codeAgent + " " + nom + " " + prenom + " " + codeCycle;
 		}
+		
+		public ArrayList<Agent> toArrayList(){
+			return new ArrayList<Agent> (lesAgents.values());
+		}
 			
 } //End Class Agent
 
