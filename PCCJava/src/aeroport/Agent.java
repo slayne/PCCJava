@@ -112,8 +112,11 @@ public abstract class Agent
 			System.out.println("------------------------");
 			System.out.println(lesTaches.size());
 			for(Tache t : this.lesTaches.values()){
+				System.out.println(t.toString());
+				System.out.println(t.gethoraireDebut().horaireEnMinutes() - this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().horaireEnMinutes());
 				if(!t.gethoraireDebut().equals(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire()) && t.gethoraireDebut().horaireEnMinutes() - this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().horaireEnMinutes() >=30 ){
 					//Si la premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
+					System.out.println("premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche ");
 					liste.add(new TrancheHoraire(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire(), t.gethoraireDebut()));
 				}
 				if(t.gethoraireDebut().horaireEnMinutes() - lasthorairefin.horaireEnMinutes()>=30){
@@ -144,7 +147,6 @@ public abstract class Agent
 		
 		public static void construirePlanning(){
 			Tache.affecterTachesVol();
-			System.out.println("tet");
 			//Agent_temps_plein.affecterTachesRepas();
 			Agent.affecterTacheAccueil();
 		}
@@ -170,10 +172,10 @@ public abstract class Agent
 		public static void afficherLesAgents(){
 			for(Agent a : lesAgents.values()){
 				System.out.println(a.toString());
-				/*System.out.println("Taches :");
-				for(Tache t : lesTaches.values()){
+				System.out.println("Taches :");
+				for(Tache t : a.lesTaches.values()){
 					System.out.println(t.toString());
-				}*/
+				}
 			}
 		}
 		

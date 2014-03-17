@@ -152,11 +152,9 @@ public  abstract class Tache  implements Comparable<Tache>
 					//System.out.println("on affecte");
 					t.setAgent(a);
 					a.addTache(t);
-					i++;
-					System.out.println(i);
 				}
 			}
-			System.out.println("bla");
+			//System.out.println("bla");
 		}
 		
 		public static HashMap<Integer,Tache> toutesLesTaches(){
