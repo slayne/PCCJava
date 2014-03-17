@@ -62,7 +62,7 @@ public abstract class Vol
 
 		
 		public String toString(){
-			return codeVol;
+			return "Code : "+codeVol+" Avion : "+lAvion;
 		}
 	
 		
@@ -86,9 +86,14 @@ public abstract class Vol
 		
 		
 		public static void afficherListeDesVols(){
-			
+			for(Vol v : lesVols.values()){
+				System.out.println(v.toString());
+			}
 		}
 		
+		public void afficher(){
+			System.out.println(toString());
+		}
 	
 		
 	

@@ -50,7 +50,7 @@ import java.util.*;
 			}
 			
 			public String toString(){
-				return super.toString() + " " + horaireArrive + " "+ villeDarrive;
+				return " Arrivée du vol "+super.toString() + " Horaire : " + horaireArrive + " Ville : "+ villeDarrive;
 			}
 		
 			public void lesInstances()

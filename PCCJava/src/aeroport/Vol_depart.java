@@ -58,7 +58,7 @@ public  class Vol_depart  extends Vol
 		}
 		
 		public String toString(){
-			return super.toString() + " " + horaireDepart + " "+ villeDepart;
+			return "Départ du vol "+super.toString() + " Horaire : " + horaireDepart + " Ville : "+ villeDepart;
 		}
 	
 		public void lesInstances()

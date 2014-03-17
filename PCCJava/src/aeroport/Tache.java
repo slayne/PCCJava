@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 
 /**************************************************************************
@@ -31,8 +32,8 @@ public  abstract class Tache  implements Comparable<Tache>
 		private static int ident=0;
 		private static HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
 		//Attributes Association
-		Agent lAgent;
-		Vol leVol;
+		private Agent lAgent;
+		private Vol leVol;
 
 	    public Tache(){
 	    	//estAffectee = false;
@@ -158,13 +159,12 @@ public  abstract class Tache  implements Comparable<Tache>
 		
 		
 		
-		public static void afficherUneTache(Tache t){
-			
-			
+		public void afficherUneTache(){
+			System.out.println(toString());
 		}
 		
-		public static void afficherVolAssocieTache(Tache t){
-			
+		public void afficherVolAssocieTache(){
+			this.leVol.afficher();
 		}
 		
 
