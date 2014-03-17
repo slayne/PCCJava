@@ -76,10 +76,19 @@ public abstract class Vol
 		
 		
 		
-		public void afficherListeTachesVol(){
-			for(Tache t : lesTaches.values()){
-				System.out.println(t.toString());
+		public static void afficherListeTachesVol(String cde){
+			
+			for(Vol v : lesVols.values()){
+				if(v.getCodeVol().equals(cde)){
+					System.out.println("\nListe des taches associées au vol : " + v.getCodeVol());
+					for(Tache t : v.getLesTaches().values()){
+						System.out.println(t.toString());
+					}
+				}
+				
 			}
+			
+			
 			
 		}
 		
@@ -91,11 +100,7 @@ public abstract class Vol
 			}
 		}
 		
-		public static void afficherLeVol(String cde){
-			System.out.println("ça doit afficher les tache du vol");
-		}
-	
-		
+
 	
 	
 

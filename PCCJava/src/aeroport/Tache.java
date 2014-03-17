@@ -29,7 +29,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		private String type;
 		//private Boolean estAffectee;
 		
-		private static int ident=0;
+		private static int ident=1;
 		private static HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
 		//Attributes Association
 		private Agent lAgent;
@@ -48,8 +48,9 @@ public  abstract class Tache  implements Comparable<Tache>
 	    }
 	    
 	    public String toString(){
-	    	return "Tache : "+idTache+"Type : "+this.getType()+"\n"+tranche.toString();//+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString();
+	    	return "N° de la tache : "+idTache+" | Type : "+this.getType()+" | "+tranche.toString();//+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString();
 	    }
+	    
 	    public Tache(Horaire dd,Horaire df,Agent a,Vol v){
 	    	//estAffectee = false;
 	    	tranche = new TrancheHoraire(dd, df);

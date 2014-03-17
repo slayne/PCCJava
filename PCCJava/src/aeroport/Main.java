@@ -53,7 +53,7 @@ public class Main {
 		
 		//Tache.afficherLesTaches();
 		//Affectation des taches
-		Agent.construirePlanning();
+		//Agent.construirePlanning();
 		//ArrayList<Agent> lesA = new ArrayList(Agent.toArray)
 		
 		
@@ -65,15 +65,15 @@ public class Main {
 		//Consulter planning taches agent
 		choix = "P0022"; //"interagir("Saisir le numéro d'un agent : ");
 		//System.out.println("Vous avez saisi : " + choix);
-		Agent.afficherListeTachesUnAgent(choix);
+		//Agent.afficherListeTachesUnAgent(choix);
 		 
 		 
 		//Consulter planning taches liées a un vol
 		Vol.afficherListeDesVols();
 		choix = "IT4444"; //"interagir("Saisir le numéro d'un vol : ");
 		//System.out.println("Vous avez saisi : " + choix);
-		Vol.afficherLeVol(choix); 
-		 
+		Vol.afficherListeTachesVol(choix); 
+		
 		 
 		
 		
