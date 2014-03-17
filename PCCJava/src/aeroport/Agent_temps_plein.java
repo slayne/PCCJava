@@ -159,6 +159,9 @@ import java.util.*;
 	}
 		
 		
+	public static HashMap <String,Agent_temps_plein> getAgentsTempsPlein(){
+		return lesAgentsTempsPlein;
+	}
 		
 	
 	

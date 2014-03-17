@@ -103,7 +103,9 @@ public  class Agent_mi_temps  extends Agent
 		return true;
 	}
 	
-	
+	public static HashMap <String,Agent_mi_temps> getAgentsMiTemps(){
+		return lesAgentsMiTemps;
+	}
 		
 	
 	
