@@ -51,11 +51,63 @@ public class Main {
 		
 		
 		//Affectation des taches
+		Agent.construirePlanning();
+		// lesAgents = new Agent;
 		
 		
 		
 		//MENU ...
+		
+		
+		//Consulter planning taches agent
+		 
+		 
+		 
+		//Consulter planning taches liées a un vol
+		 
+		 
+		 
+		 
+		
+		
+		
 
 	}
+	
+	
+	public static int interagir(String texte){
+		int retour = -999;
+		
+		return retour; 
+	}
+	
+	
+
+	public static void afficherListeTachesUnAgent(Agent a){
+		
+	}
+	
+	
+	public static void afficherVolAssocieTache(Tache t){
+		
+	}
+	
+	
+	
+	public static void afficherListeDesVols(){
+		
+	}
+
+	public static void afficherListeTachesUnVol(){
+	
+}
+	
+
+	public static void afficherUneTache(){
+	
+	}
+	
+
+	
 
 }
