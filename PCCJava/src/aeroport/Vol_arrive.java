@@ -64,6 +64,10 @@ import java.util.*;
 		
 			}
 			
+			public static ArrayList<Vol_arrive> getVolsArrives(){
+				return new ArrayList<Vol_arrive>(lesVolsArrives.values());
+			}
+			
 			
 			public static void creerTouslesVolsArrives(String cheminFichier) throws IOException{
 				

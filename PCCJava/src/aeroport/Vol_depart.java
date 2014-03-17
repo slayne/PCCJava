@@ -49,6 +49,11 @@ public  class Vol_depart  extends Vol
 			
 		}
 		
+		public static ArrayList<Vol_depart> getVolsDepart(){
+			return new ArrayList<Vol_depart>(lesVolsDepart.values());
+		}
+		
+		
 		public Horaire getHoraireDepart(){
 			return horaireDepart;
 		}
