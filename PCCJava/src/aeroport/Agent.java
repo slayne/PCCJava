@@ -159,16 +159,20 @@ public abstract class Agent
 		public static void afficherLesAgents(){
 			for(Agent a : lesAgents.values()){
 				System.out.println(a.toString());
-				System.out.println("Taches :");
+				/*System.out.println("Taches :");
 				for(Tache t : lesTaches.values()){
 					System.out.println(t.toString());
-				}
+				}*/
 			}
 		}
 		
 		public static void afficherListeTachesUnAgent(String codeA){
+			
+			System.out.println("Liste des taches de l'agent : " + codeA);
 			for(Tache t : lesTaches.values()){
-				System.out.println(t.toString());
+				if(t.getAgent().getCodeAgent().equals(codeA)){
+					System.out.println(t.toString());
+				}
 			}
 		}
 		
