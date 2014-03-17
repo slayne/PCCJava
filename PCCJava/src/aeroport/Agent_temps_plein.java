@@ -140,12 +140,18 @@ import java.util.*;
 	}
 		
 	public static void affecterTachesRepas(){
+		boolean affected;
 		for(Agent_temps_plein a : lesAgentsTempsPlein.values()){
+			affected=false;
 			for(TrancheHoraire tr  : a.getTranchesLibres()){
-				if(new TrancheHoraire(new Horaire(11,30),new Horaire(14,00)).contient(tr)){
+				if(tr.getDebutTrancheHoraire().compareTo(new Horaire(11,30))>=0 && tr.getDebutTrancheHoraire().compareTo(new Horaire(14,00))<=0){
 					a.addTache(new Tache_repas(tr.getDebutTrancheHoraire(), tr.getFinTrancheHoraire(), a));
+					affected=true;
 					break;
 				}
+			}
+			if(!affected){
+				a.addTache(new Tache_repas(new Horaire(11,30),new Horaire(12,30),a));
 			}
 		}
 	}

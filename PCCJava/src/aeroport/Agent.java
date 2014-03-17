@@ -134,7 +134,7 @@ public abstract class Agent
 		
 		public static void construirePlanning(){
 			Tache.affecterTachesVol();
-			//Agent.affecterTacheRepas();
+			Agent_temps_plein.affecterTachesRepas();
 			Agent.affecterTacheAccueil();
 		}
 			
