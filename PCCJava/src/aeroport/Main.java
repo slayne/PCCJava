@@ -51,9 +51,14 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+		
+		System.out.println("Nombre de taches :" + Tache.toutesLesTaches().size());
+		Tache.afficherLesTaches();
 		//Affectation des taches
 		Agent.construirePlanning();
 		//ArrayList<Agent> lesA = new ArrayList(Agent.toArray)
+		
+		System.out.println("Nombre de taches :" + Tache.toutesLesTaches().size());
 		
 		
 		//Le système affiche le MENU ...
@@ -63,9 +68,9 @@ public class Main {
 				
 		//Consulter planning taches agent
 		Agent.afficherLesAgents();
-		//String choix = interagir("Saisir le numéro d'un agent : ");
+		//String choix = "P0022"; //"interagir("Saisir le numéro d'un agent : ");
 		//System.out.println("Vous avez saisi : " + choix);
-		//Agent.
+		//Agent.afficherListeTachesUnAgent(choix);
 		 
 		 
 		//Consulter planning taches liées a un vol
