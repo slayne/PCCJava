@@ -43,7 +43,7 @@ public  abstract class Tache  implements Comparable<Tache>
 	    	setType(new String());
 	    //	leVol=new Vol();
 	    //	lAgent=new Agent();
-	    	lesTaches.put(idTache, this);
+	    	getLesTaches().put(idTache, this);
 	    	ident++;
 	    }
 	    
@@ -57,12 +57,12 @@ public  abstract class Tache  implements Comparable<Tache>
 	    	idTache=ident;
 	    	lAgent=a;
 	    	leVol=v;
-	    	lesTaches.put(idTache, this);
+	    	getLesTaches().put(idTache, this);
 	    	ident++;
 	    }
 		
 		public void lesInstances(){
-			for(Tache t : lesTaches.values()){
+			for(Tache t : getLesTaches().values()){
 				System.out.println(t.toString());
 			}
 		}
@@ -126,12 +126,16 @@ public  abstract class Tache  implements Comparable<Tache>
 			return this.idTache;
 		}
 		
+		public TrancheHoraire getTranche(){
+			return tranche;
+		}
+		
 		public int compareTo(Tache t){
 			return tranche.getDebutTrancheHoraire().compareTo(t.tranche.getDebutTrancheHoraire());
 		}
 		
 		public ArrayList<Tache> getTachesTriees(){
-			ArrayList<Tache> l =new ArrayList<Tache>(lesTaches.values());
+			ArrayList<Tache> l =new ArrayList<Tache>(getLesTaches().values());
 			Collections.sort(l);
 			return l;
 		}
@@ -145,20 +149,17 @@ public  abstract class Tache  implements Comparable<Tache>
 		}
 		
 		public static void affecterTachesVol(){
-			int i=0;
-			for(Tache t : lesTaches.values()){
-				Agent a = Agent.estDispoA(t.tranche);
+			for(Tache t : getLesTaches().values()){
+				Agent a = Agent.trouverAgentA(t.tranche);
 				if (a!=null){
-					//System.out.println("on affecte");
 					t.setAgent(a);
 					a.addTache(t);
 				}
 			}
-			//System.out.println("bla");
 		}
 		
 		public static HashMap<Integer,Tache> toutesLesTaches(){
-			return lesTaches;
+			return getLesTaches();
 		}
 		
 		
@@ -168,13 +169,21 @@ public  abstract class Tache  implements Comparable<Tache>
 		}
 		
 		public static void afficherLesTaches(){
-			for(Tache t : lesTaches.values()){
+			for(Tache t : getLesTaches().values()){
 				System.out.println(t.toString());
 			}
 		}
 		
 		public void afficherVolAssocieTache(){
 			this.leVol.toString();
+		}
+
+		public static HashMap<Integer,Tache> getLesTaches() {
+			return lesTaches;
+		}
+
+		public static void setLesTaches(HashMap<Integer,Tache> lesTaches) {
+			Tache.lesTaches = lesTaches;
 		}
 		
 

@@ -10,6 +10,7 @@ package aeroport;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
@@ -83,15 +84,22 @@ public abstract class Agent
 		/*
 		 * @return un agent disponible pour le creneau indiqu� en param�tre
 		 */
-		public static Agent estDispoA(TrancheHoraire tr){
-			//	Duree d=tr.getDuree();
-				
+		public static Agent trouverAgentA(TrancheHoraire tr){
+				boolean dispo=true;
 				for(Agent a : lesAgents.values()){
-					if(a.lesTaches.size()==0){
-						return a;
-					}
-					for(Tache t : a.lesTaches.values()){
-						if (!t.chevauche(tr)&& a.estEnFonction(tr) && a.peutFaireRepas(t)){
+					if(a.estEnFonction(tr)){
+						if(a.lesTaches.size()==0){
+							return a;
+						}
+						for(Tache t : a.lesTaches.values()){
+							if (dispo && !t.chevauche(tr) && a.peutFaireRepas(t)){
+								dispo=true;
+								
+							}else{
+								dispo=false;
+							}
+						}
+						if(dispo){
 							return a;
 						}
 					}
@@ -108,27 +116,29 @@ public abstract class Agent
 		public ArrayList<TrancheHoraire> getTranchesLibres(){
 			ArrayList<TrancheHoraire> liste = new ArrayList<TrancheHoraire>();
 			Horaire lasthorairefin=this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire(); // Horaire fin de la tache pr�c�dente
+			boolean temp=true;
 			// On parcours les taches de l'agent pour trouver tous les trous
-			System.out.println("------------------------");
-			System.out.println(lesTaches.size());
 			for(Tache t : this.lesTaches.values()){
-				System.out.println(t.toString());
-				System.out.println(t.gethoraireDebut().horaireEnMinutes() - this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().horaireEnMinutes());
-				if(!t.gethoraireDebut().equals(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire()) && t.gethoraireDebut().horaireEnMinutes() - this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().horaireEnMinutes() >=30 ){
-					//Si la premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
-					System.out.println("premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche ");
-					liste.add(new TrancheHoraire(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire(), t.gethoraireDebut()));
+				if(temp){
+					if(!t.gethoraireDebut().equals(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire()) && t.gethoraireDebut().horaireEnMinutes() - this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().horaireEnMinutes() >=30){
+						//Si la premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
+						liste.add(new TrancheHoraire(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire(), t.gethoraireDebut()));
+						temp=false;
+					}
+					if(t.gethoraireDebut().horaireEnMinutes() - lasthorairefin.horaireEnMinutes()>=30){
+						//si le temps entre la fin de la derniere tache et le debut de la tache courante >=30 minutes alors on ajoute la tranche
+						liste.add(new TrancheHoraire(lasthorairefin, t.gethoraireDebut()));
+						temp=false;
+					}
+					if(this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire().horaireEnMinutes()-t.gethoraireFin().horaireEnMinutes()>=30){
+						//si le temps entre la fin de la tahce courante et l'horaire de d�bauche est plus grand que 30mn on ajoute
+						liste.add(new TrancheHoraire(t.gethoraireFin(), this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire()));
+						temp=false;
+					}
+					lasthorairefin=t.gethoraireFin();
 				}
-				if(t.gethoraireDebut().horaireEnMinutes() - lasthorairefin.horaireEnMinutes()>=30){
-					//si le temps entre la fin de la derniere tache et le debut de la tache courante >=30 minutes alors on ajoute la tranche
-					liste.add(new TrancheHoraire(lasthorairefin, t.gethoraireDebut()));
-				}
-				if(this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire().horaireEnMinutes()-t.gethoraireFin().horaireEnMinutes()>=30){
-					//si le temps entre la fin de la tahce courante et l'horaire de d�bauche est plus grand que 30mn on ajoute
-					liste.add(new TrancheHoraire(t.gethoraireFin(), this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire()));
-				}
-				lasthorairefin=t.gethoraireFin();
 			}
+			
 			
 			return liste;
 		}
@@ -137,17 +147,18 @@ public abstract class Agent
 			
 			for(Agent a : lesAgents.values()){
 				//System.out.println(a.toString());
-				int i=0;
+				//int i=0;
 				for(TrancheHoraire tr  : a.getTranchesLibres()){
 					//System.out.println(i);i++;
 					a.addTache(new Tache_accueil_Information(tr.getDebutTrancheHoraire(),tr.getFinTrancheHoraire(),a));
 				}
 			}
+			//System.out.println(Tache.getLesTaches().size());
 		}
 		
 		public static void construirePlanning(){
 			Tache.affecterTachesVol();
-			//Agent_temps_plein.affecterTachesRepas();
+			Agent_temps_plein.affecterTachesRepas();
 			Agent.affecterTacheAccueil();
 		}
 			
@@ -161,7 +172,7 @@ public abstract class Agent
 		}
 		
 		public String toString(){
-			return ""+codeAgent + " " + nom + " " + prenom + " " + codeCycle;
+			return ""+codeAgent + " " + nom + " " + prenom + " Horraires :" + this.calculTrancheHoraire(NUM_SEM).toString();
 		}
 		
 		public static ArrayList<Agent> toArrayList(){
@@ -171,12 +182,19 @@ public abstract class Agent
 		
 		public static void afficherLesAgents(){
 			for(Agent a : lesAgents.values()){
+				System.out.println();
 				System.out.println(a.toString());
 				System.out.println("Taches :");
-				for(Tache t : a.lesTaches.values()){
+				for(Tache t : a.getTachesTriees()){
 					System.out.println(t.toString());
 				}
 			}
+		}
+		
+		public ArrayList<Tache> getTachesTriees(){
+			ArrayList<Tache> l =new ArrayList<Tache>(getLesTaches().values());
+			Collections.sort(l);
+			return l;
 		}
 		
 		public HashMap<Integer,Tache> getLesTaches(){

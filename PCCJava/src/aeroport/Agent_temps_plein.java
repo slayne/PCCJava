@@ -120,7 +120,7 @@ import java.util.*;
 						
 						
 					}
-				//sinon il faire le repas
+				//sinon il fait le repas
 			
 			}catch(IndexOutOfBoundsException e){
 		
@@ -129,6 +129,7 @@ import java.util.*;
 					hf.ajout(t.getDuree());
 					if(hf.compareTo(new Horaire(14,0))>=0){
 						res = false;
+						//On regarde si 13h30 + la tache ne dépasse pas 14h 
 					}
 					
 					// cas ou l'agent est en décalé soir, il doit donc commencer par manger
