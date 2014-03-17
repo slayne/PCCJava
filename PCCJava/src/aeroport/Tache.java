@@ -165,7 +165,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		
 		public static void afficherLesTaches(){
 			for(Tache t : lesTaches.values()){
-				t.toString();
+				System.out.println(t.toString());
 			}
 		}
 		
