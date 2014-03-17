@@ -19,7 +19,7 @@ public class Main {
 		String FagentsTempsPlein = "AgentsTempsPlein-14-v1.txt";
 		String FvolA = "ProgrammeVolsArrivees14-v2.txt";
 		String FvolD = "ProgrammeVolsDeparts14-v2.txt";
-		
+		String choix;
 		
 		HashMap<String, Avion> tousLesAvions = new HashMap<String, Avion>(); //HashMap de tous les avions
 		HashMap<String, Agent> tousLesAgents = new HashMap<String, Agent>(); //HashMap de tous les agents
@@ -63,15 +63,16 @@ public class Main {
 		//Tache.afficherLesTaches();
 				
 		//Consulter planning taches agent
-		Agent.afficherLesAgents();
-		String choix = "P0022"; //"interagir("Saisir le numéro d'un agent : ");
+		choix = "P0022"; //"interagir("Saisir le numéro d'un agent : ");
 		//System.out.println("Vous avez saisi : " + choix);
 		Agent.afficherListeTachesUnAgent(choix);
 		 
 		 
 		//Consulter planning taches liées a un vol
-		 
-		 
+		Vol.afficherListeDesVols();
+		choix = "IT4444"; //"interagir("Saisir le numéro d'un vol : ");
+		//System.out.println("Vous avez saisi : " + choix);
+		Vol.afficherLeVol(choix); 
 		 
 		 
 		

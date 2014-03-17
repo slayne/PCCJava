@@ -91,8 +91,8 @@ public abstract class Vol
 			}
 		}
 		
-		public void afficher(){
-			System.out.println(toString());
+		public static void afficherLeVol(String cde){
+			System.out.println("ça doit afficher les tache du vol");
 		}
 	
 		

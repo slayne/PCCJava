@@ -147,7 +147,7 @@ public  abstract class Tache  implements Comparable<Tache>
 			for(Tache t : lesTaches.values()){
 				Agent a = Agent.estDispoA(t.tranche);
 				if (a!=null){
-					System.out.println("on affecte");
+					//System.out.println("on affecte");
 					t.setAgent(a);
 					a.addTache(t);
 				}
@@ -171,7 +171,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		}
 		
 		public void afficherVolAssocieTache(){
-			this.leVol.afficher();
+			this.leVol.toString();
 		}
 		
 
