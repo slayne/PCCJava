@@ -85,6 +85,7 @@ public abstract class Agent
 		 */
 		public static Agent estDispoA(TrancheHoraire tr){
 			//	Duree d=tr.getDuree();
+
 				for(Agent a : lesAgents.values()){
 					for(Tache t : a.lesTaches.values()){
 						if (!t.chevauche(tr)&& a.estEnFonction(tr) && a.peutFaireRepas(t)){
