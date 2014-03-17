@@ -27,7 +27,7 @@ public abstract class Agent
 	private String prenom;
 	private int codeCycle;
 
-	protected HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
+	protected static HashMap<Integer,Tache> lesTaches = new HashMap<Integer,Tache>();
 	private static HashMap <String,Agent> lesAgents = new HashMap <String,Agent>();
 	
 	//Operations
@@ -148,16 +148,28 @@ public abstract class Agent
 		}
 		
 		public String toString(){
-			return codeAgent + " " + nom + " " + prenom + " " + codeCycle;
+			return ""+codeAgent + " " + nom + " " + prenom + " " + codeCycle;
 		}
 		
-		public ArrayList<Agent> toArrayList(){
+		public static ArrayList<Agent> toArrayList(){
 			return new ArrayList<Agent> (lesAgents.values());
 		}
 		
 		
-		public static void afficherListeTachesUnAgent(Agent a){
-			
+		public static void afficherLesAgents(){
+			for(Agent a : lesAgents.values()){
+				System.out.println(a.toString());
+				System.out.println("Taches :");
+				for(Tache t : lesTaches.values()){
+					System.out.println(t.toString());
+				}
+			}
+		}
+		
+		public void afficherListeTachesAgent(){
+			for(Tache t : lesTaches.values()){
+				System.out.println(t.toString());
+			}
 		}
 		
 			

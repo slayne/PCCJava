@@ -83,17 +83,6 @@ public  class Avion
 			return lesAvions;
 		}
 	
-		public static void lesInstances()
-		{
-			Collection<Avion> col = lesAvions.values();
-			Iterator it = col.iterator();
-			while(it.hasNext()){
-				System.out.println((Avion)it.next());
-			}
-			
-	
-		}
-		
 		public static void creerTouslesAvions(String cheminFichier) throws IOException{
 			
 			 BufferedReader entree = new BufferedReader(new FileReader(cheminFichier));

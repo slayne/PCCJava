@@ -65,16 +65,6 @@ public abstract class Vol
 			return codeVol;
 		}
 	
-		public void lesInstances()
-		{
-	
-			Collection<Vol> col = lesVols.values();
-			Iterator it = col.iterator();
-			while(it.hasNext()){
-				System.out.println((Vol)it.next());
-			}
-	
-		}
 		
 		
 		public static void creerTousLesVols(String fichierArrive, String fichierDepart) throws IOException{
@@ -86,7 +76,10 @@ public abstract class Vol
 		
 		
 		
-		public static void afficherListeTachesUnVol(Vol v){
+		public void afficherListeTachesVol(){
+			for(Tache t : lesTaches.values()){
+				System.out.println(t.toString());
+			}
 			
 		}
 		
