@@ -1,7 +1,9 @@
 package aeroport;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
 
@@ -49,18 +51,19 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		
 		//Affectation des taches
 		Agent.construirePlanning();
-		// lesAgents = new Agent;
+		//ArrayList<Agent> lesA = new ArrayList(Agent.toArray)
 		
 		
+		//Le système affiche le MENU ...
+		menuPrincipal();
 		
-		//MENU ...
-		
-		
+				
 		//Consulter planning taches agent
-		 
+		Agent.afficherLesAgents();
+		String choix = interagir("Saisir le numéro d'un agent : ");
+		System.out.println("Vous avez saisi : " + choix);
 		 
 		 
 		//Consulter planning taches liées a un vol
@@ -75,8 +78,18 @@ public class Main {
 	}
 	
 	
-	public static int interagir(String texte){
-		int retour = -999;
+	public static void menuPrincipal(){
+		System.out.println("MENU PRINCIPAL");
+		System.out.println("1 : Consulter planning taches agent");
+	}
+	
+	public static String interagir(String texte){
+		String retour = null;
+		System.out.println(texte);
+		
+		Scanner sc = new Scanner(System.in);
+	    retour = sc.nextLine();
+		//System.out.println("Vous avez saisi : " + texte);
 		
 		return retour; 
 	}
