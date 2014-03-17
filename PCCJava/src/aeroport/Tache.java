@@ -48,7 +48,7 @@ public  abstract class Tache  implements Comparable<Tache>
 	    }
 	    
 	    public String toString(){
-	    	return("Tache : "+idTache+"Type : "+this.getType()+"\n"+tranche.toString()+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString());
+	    	return "Tache : "+idTache+"Type : "+this.getType()+"\n"+tranche.toString();//+"\nAgent : "+lAgent.toString()+"\nVol : "+leVol.toString();
 	    }
 	    public Tache(Horaire dd,Horaire df,Agent a,Vol v){
 	    	//estAffectee = false;
