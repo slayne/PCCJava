@@ -65,7 +65,7 @@ public class Main {
 		//Consulter planning taches agent
 		choix = "P0022"; //"interagir("Saisir le numéro d'un agent : ");
 		//System.out.println("Vous avez saisi : " + choix);
-		//Agent.afficherListeTachesUnAgent(choix);
+		Agent.afficherListeTachesUnAgent(choix);
 		 
 		 
 		//Consulter planning taches liées a un vol
@@ -73,11 +73,7 @@ public class Main {
 		choix = "IT4444"; //"interagir("Saisir le numéro d'un vol : ");
 		//System.out.println("Vous avez saisi : " + choix);
 		Vol.afficherListeTachesVol(choix); 
-		
-		 
-		
-		
-		
+	
 
 	}
 	

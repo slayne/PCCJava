@@ -179,15 +179,24 @@ public abstract class Agent
 			}
 		}
 		
-	/*	public static void afficherListeTachesUnAgent(String codeA){
+		public HashMap<Integer,Tache> getLesTaches(){
+			return lesTaches;
+		}
+		
+		
+		public static void afficherListeTachesUnAgent(String codeA){
 			
-			System.out.println("Liste des taches de l'agent : " + codeA);
-			for(Tache t : .lesTaches.values()){
-				if(t.getAgent().getCodeAgent().equals(codeA)){
-					System.out.println(t.toString());
+			for(Agent a : lesAgents.values()){
+				if(a.getCodeAgent().equals(codeA)){
+					System.out.println("Liste des taches de l'agent : " + a.getCodeAgent());
+					for(Tache t : a.getLesTaches().values()){
+						System.out.println(t.toString());
+					}
 				}
+				
 			}
-		}*/
+			
+		}
 		
 			
 } //End Class Agent

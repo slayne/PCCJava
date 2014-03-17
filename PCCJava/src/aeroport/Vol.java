@@ -95,6 +95,8 @@ public abstract class Vol
 		
 		
 		public static void afficherListeDesVols(){
+			
+			System.out.println("\nListe des vols : ");
 			for(Vol v : lesVols.values()){
 				System.out.println(v.toString());
 			}
