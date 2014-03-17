@@ -85,6 +85,17 @@ public abstract class Vol
 		}
 		
 		
+		
+		public static void afficherListeTachesUnVol(Vol v){
+			
+		}
+		
+		
+		
+		public static void afficherListeDesVols(){
+			
+		}
+		
 	
 		
 	

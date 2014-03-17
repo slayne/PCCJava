@@ -154,6 +154,12 @@ public abstract class Agent
 		public ArrayList<Agent> toArrayList(){
 			return new ArrayList<Agent> (lesAgents.values());
 		}
+		
+		
+		public static void afficherListeTachesUnAgent(Agent a){
+			
+		}
+		
 			
 } //End Class Agent
 

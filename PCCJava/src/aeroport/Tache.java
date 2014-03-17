@@ -156,6 +156,17 @@ public  abstract class Tache  implements Comparable<Tache>
 			return lesTaches;
 		}
 		
+		
+		
+		public static void afficherUneTache(Tache t){
+			
+			
+		}
+		
+		public static void afficherVolAssocieTache(Tache t){
+			
+		}
+		
 
 }	
 

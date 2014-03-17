@@ -83,31 +83,4 @@ public class Main {
 	
 	
 
-	public static void afficherListeTachesUnAgent(Agent a){
-		
-	}
-	
-	
-	public static void afficherVolAssocieTache(Tache t){
-		
-	}
-	
-	
-	
-	public static void afficherListeDesVols(){
-		
-	}
-
-	public static void afficherListeTachesUnVol(){
-	
-}
-	
-
-	public static void afficherUneTache(){
-	
-	}
-	
-
-	
-
 }
