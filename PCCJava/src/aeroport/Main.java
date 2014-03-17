@@ -59,11 +59,13 @@ public class Main {
 		//Le système affiche le MENU ...
 		menuPrincipal();
 		
+		Tache.afficherLesTaches();
 				
 		//Consulter planning taches agent
 		Agent.afficherLesAgents();
-		String choix = interagir("Saisir le numéro d'un agent : ");
-		System.out.println("Vous avez saisi : " + choix);
+		//String choix = interagir("Saisir le numéro d'un agent : ");
+		//System.out.println("Vous avez saisi : " + choix);
+		//Agent.
 		 
 		 
 		//Consulter planning taches liées a un vol

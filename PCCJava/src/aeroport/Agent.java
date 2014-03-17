@@ -166,7 +166,7 @@ public abstract class Agent
 			}
 		}
 		
-		public void afficherListeTachesAgent(){
+		public static void afficherListeTachesUnAgent(String codeA){
 			for(Tache t : lesTaches.values()){
 				System.out.println(t.toString());
 			}
