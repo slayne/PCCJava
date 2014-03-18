@@ -193,7 +193,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		public static int getNbTacheNonAffecte(){
 			int res=0;
 			for(Tache t : lesTaches.values()){
-				if(t.estAffecte()){
+				if(!t.estAffecte()){
 					res++;
 				}
 			}
@@ -201,8 +201,23 @@ public  abstract class Tache  implements Comparable<Tache>
 		}
 		
 		public static int getNbTacheAffecte(){
-			int res = lesTaches.size();
-			return res-getNbTacheNonAffecte();
+			int res=0;
+			for(Tache t : lesTaches.values()){
+				if(t.estAffecte()){
+					res++;
+				}
+			}
+			return res;
+		}
+		
+		public static int getTacheRepas(){
+			int res=0;
+			for(Tache t : lesTaches.values()){
+				if(t instanceof Tache_repas){
+					res++;
+				}
+			}
+			return res;
 		}
 		
 		

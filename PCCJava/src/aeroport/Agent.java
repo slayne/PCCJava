@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import java.lang.String;
 import java.io.*;
 
-public abstract class Agent  
+public abstract class Agent 
 { 
 	//Attributes
 	public static final int NUM_SEM=3;
@@ -85,8 +85,9 @@ public abstract class Agent
 		 * @return un agent disponible pour le creneau indiqu� en param�tre
 		 */
 		public static Agent trouverAgentA(TrancheHoraire tr){
-				boolean dispo=true;
+				boolean dispo;
 				for(Agent a : lesAgents.values()){
+					dispo=true;
 					if(a.estEnFonction(tr)){
 						if(a.lesTaches.size()==0){
 							return a;
@@ -196,6 +197,7 @@ public abstract class Agent
 			Collections.sort(l);
 			return l;
 		}
+	
 		
 		public HashMap<Integer,Tache> getLesTaches(){
 			return lesTaches;

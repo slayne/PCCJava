@@ -55,6 +55,11 @@ public class Main {
 		//Affectation des taches
 		Agent.construirePlanning();
 		Agent.afficherLesAgents();
+		System.out.println(Tache.getNbTacheNonAffecte());
+		System.out.println(Tache.getNbTacheAffecte());
+		System.out.println(Tache.getLesTaches().size());
+		System.out.println(Tache.getTacheRepas());
+		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
 		//ArrayList<Agent> lesA = new ArrayList(Agent.toArray)
 		
 		
