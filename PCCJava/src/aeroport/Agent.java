@@ -52,6 +52,15 @@ public abstract class Agent
 		public abstract TrancheHoraire calculTrancheHoraire(int numSemaine);
 		
 		
+		public String getNom(){
+			return nom;
+		}
+		
+		public String getPrenom(){
+			return prenom;
+		}
+		
+		
 		public static void resetAgent () {
 			lesAgents.clear();
 		}
