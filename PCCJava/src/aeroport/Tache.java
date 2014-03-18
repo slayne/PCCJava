@@ -153,7 +153,7 @@ public  abstract class Tache  implements Comparable<Tache>
 				Agent a = Agent.trouverAgentA(t.tranche);
 				if (a!=null){
 					t.setAgent(a);
-					a.addTache(t);
+					a.addTache(t);//
 				}
 			}
 		}
