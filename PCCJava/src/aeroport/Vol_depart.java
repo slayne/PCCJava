@@ -54,7 +54,7 @@ public  class Vol_depart  extends Vol
 		}
 		
 		
-		public Horaire getHoraireDepart(){
+		public Horaire getHoraire(){
 			return horaireDepart;
 		}
 		

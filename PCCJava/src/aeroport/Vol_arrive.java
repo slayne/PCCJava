@@ -41,7 +41,7 @@ import java.util.*;
 				
 			}
 			
-			public Horaire getHoraireArrive(){
+			public Horaire getHoraire(){
 				return horaireArrive;
 			}
 			

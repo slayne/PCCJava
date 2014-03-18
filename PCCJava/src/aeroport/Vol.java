@@ -42,6 +42,9 @@ public abstract class Vol
 			
 			
 		}
+		
+		abstract public String getVille();
+		abstract public Horaire getHoraire();
 	
 	
 		public HashMap<Integer, Tache> getLesTaches(){

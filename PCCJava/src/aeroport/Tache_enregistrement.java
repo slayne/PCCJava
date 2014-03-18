@@ -16,7 +16,7 @@ import java.util.*;
 public  class Tache_enregistrement  extends Tache 
 { 
 	public Tache_enregistrement(Agent a, Vol_depart v){
-		super( v.getHoraireDepart().retrait(new Duree(1,30)),v.getHoraireDepart().retrait(new Duree(15)),a,v);
+		super( v.getHoraire().retrait(new Duree(1,30)),v.getHoraire().retrait(new Duree(15)),a,v);
 		this.setType("Enregistrement");
 	}
 	
