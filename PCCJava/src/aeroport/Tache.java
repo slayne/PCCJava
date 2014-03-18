@@ -134,7 +134,7 @@ public  abstract class Tache  implements Comparable<Tache>
 			return tranche.getDebutTrancheHoraire().compareTo(t.tranche.getDebutTrancheHoraire());
 		}
 		
-		public ArrayList<Tache> getTachesTriees(){
+		public static ArrayList<Tache> getTachesTriees(){
 			ArrayList<Tache> l =new ArrayList<Tache>(getLesTaches().values());
 			Collections.sort(l);
 			return l;
@@ -149,7 +149,7 @@ public  abstract class Tache  implements Comparable<Tache>
 		}
 		
 		public static void affecterTachesVol(){
-			for(Tache t : getLesTaches().values()){
+			for(Tache t : getTachesTriees()){
 				Agent a = Agent.trouverAgentA(t.tranche);
 				if (a!=null){
 					t.setAgent(a);
@@ -204,6 +204,8 @@ public  abstract class Tache  implements Comparable<Tache>
 			int res = lesTaches.size();
 			return res-getNbTacheNonAffecte();
 		}
+		
+		
 
 }	
 
