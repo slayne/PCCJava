@@ -186,6 +186,24 @@ public  abstract class Tache  implements Comparable<Tache>
 			Tache.lesTaches = lesTaches;
 		}
 		
+		public boolean estAffecte(){
+			return(lAgent!=null);
+		}
+		
+		public static int getNbTacheNonAffecte(){
+			int res=0;
+			for(Tache t : lesTaches.values()){
+				if(t.estAffecte()){
+					res++;
+				}
+			}
+			return res;
+		}
+		
+		public static int getNbTacheAffecte(){
+			int res = lesTaches.size();
+			return res-getNbTacheNonAffecte();
+		}
 
 }	
 
