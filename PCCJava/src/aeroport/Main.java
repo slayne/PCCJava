@@ -54,7 +54,7 @@ public class Main {
 		//Tache.afficherLesTaches();
 		//Affectation des taches
 		Agent.construirePlanning();
-		//Agent.afficherLesAgents();
+		Agent.afficherLesAgents();
 		//System.out.println(Agent.getLesAgents().get("P0017").toString());
 		System.out.println(Tache.getNbTacheNonAffecte());
 		System.out.println(Tache.getNbTacheAffecte());
