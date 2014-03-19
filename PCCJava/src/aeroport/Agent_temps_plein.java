@@ -104,7 +104,10 @@ import java.util.*;
 				//est ce que si on ajoute la tranche horaire qu'on tente de lui affecter respect 2 conditions ?
 				// 1 : Il a 1h pour manger (d�but du repas entre 11h30 et 14h, peut terminer plus tard)
 				// 2: La fin de son travail se termine 1h apr�s au minimum (ex:si il fini � 15h, il doit manger au plus tard � 14)
-				
+				if(t.gethoraireDebut().horaireEnMinutes()-new Horaire(11,30).horaireEnMinutes()<60){
+					res =false;
+				}
+			
 			try{
 				Horaire horFin = new ArrayList<Tache>(this.lesTaches.values()).get(this.lesTaches.size()-1).gethoraireFin();
 				horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durée tache sert pour quand on commence � 13h30
@@ -144,7 +147,7 @@ import java.util.*;
 		boolean affected;
 		for(Agent_temps_plein a : lesAgentsTempsPlein.values()){
 			affected=false;
-			for(TrancheHoraire tr  : a.getTranchesLibreAccueil()){
+			for(TrancheHoraire tr  : a.getTranchesLibreRepas()){
 				if(!affected && tr.getDebutTrancheHoraire().compareTo(new Horaire(11,30))>=0 && tr.getDebutTrancheHoraire().compareTo(new Horaire(14,00))<=0){
 					a.addTache(new Tache_repas(tr.getDebutTrancheHoraire(), tr.getDebutTrancheHoraire().ajout(new Duree(60)), a));
 					affected=true;
@@ -156,7 +159,43 @@ import java.util.*;
 			}
 		}
 	}
+	
+	public ArrayList<TrancheHoraire> getTranchesLibreRepas(){
+		ArrayList<TrancheHoraire> liste = new ArrayList<TrancheHoraire>();
+		//System.out.println(toString());
+		//afficherTri();
+
+		Horaire debutHoraireAgent= this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire();
+		Horaire finHoraireAgent =this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire();
+		ListIterator<Tache> it = getTachesTriees().listIterator();
+		Tache tp = null;
+		Tache t = null;
+		if(it.hasNext()){
+			tp=it.next();
+			if(!tp.gethoraireDebut().equals(debutHoraireAgent) && tp.gethoraireDebut().horaireEnMinutes() - debutHoraireAgent.horaireEnMinutes() >=60){
+				//Si la premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 60 mn on ajoute la tranche
+				liste.add(new TrancheHoraire(debutHoraireAgent, tp.gethoraireDebut()));
+			} 
 		
+			while (it.hasNext()) {
+				t=it.next();
+				
+				if(t.gethoraireDebut().horaireEnMinutes() - tp.gethoraireFin().horaireEnMinutes()>=60 && t.gethoraireDebut().horaireEnMinutes()-new Horaire(11,30).horaireEnMinutes()>=60){
+					//si le temps entre la fin de la derniere tache et le debut de la tache courante >=60 minutes alors on ajoute la tranche
+					liste.add(new TrancheHoraire(tp.gethoraireFin(), t.gethoraireDebut()));
+				}else if(!it.hasNext() && finHoraireAgent.horaireEnMinutes()-t.gethoraireFin().horaireEnMinutes()>=60){
+					//Derniere Tache si le temps entre la fin de la tahce courante et l'horaire de d�bauche est plus grand que 60mn on ajoute
+					liste.add(new TrancheHoraire(t.gethoraireFin(), finHoraireAgent));
+				}
+				
+				tp=t;
+			}
+		}else{
+			//si pas de tache
+			liste.add(new TrancheHoraire(debutHoraireAgent,finHoraireAgent));
+		}			
+		return liste;
+	}
 		
 	public static HashMap <String,Agent_temps_plein> getAgentsTempsPlein(){
 		return lesAgentsTempsPlein;

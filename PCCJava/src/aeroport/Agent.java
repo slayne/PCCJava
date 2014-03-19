@@ -24,7 +24,7 @@ import java.io.*;
 public abstract class Agent 
 { 
 	//Attributes
-	public static final int NUM_SEM=3;
+	public static int NUM_SEM=3;
 	private String codeAgent;
 	private String nom;
 	private String prenom;
