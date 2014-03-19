@@ -110,7 +110,7 @@ import java.util.*;
 			
 			try{
 				Horaire horFin = new ArrayList<Tache>(this.lesTaches.values()).get(this.lesTaches.size()-1).gethoraireFin();
-				horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durée tache sert pour quand on commence � 13h30
+				horFin=horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durée tache sert pour quand on commence � 13h30
 			
 				
 					if(horFin.compareTo(new Horaire (14,0))>= 0){
@@ -129,12 +129,12 @@ import java.util.*;
 		
 				if(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().compareTo(new Horaire(13,30)) == 0 ){
 					Horaire hf = this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire();
-					hf.ajout(t.getDuree());
+					hf=hf.ajout(t.getDuree());
 					if(hf.compareTo(new Horaire(14,0))>=0){
 						res = false;
 						//On regarde si 13h30 + la tache ne dépasse pas 14h 
 					}
-					
+					System.out.println("hi");
 					// cas ou l'agent est en décalé soir, il doit donc commencer par manger
 														
 				}
