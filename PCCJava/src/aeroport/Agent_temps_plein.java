@@ -155,7 +155,7 @@ import java.util.*;
 				}
 			}
 			if(!affected){
-				a.addTache(new Tache_repas(new Horaire(11,30),new Horaire(12,30),a));
+				//a.addTache(new Tache_repas(new Horaire(11,30),new Horaire(12,30),a));
 			}
 		}
 	}

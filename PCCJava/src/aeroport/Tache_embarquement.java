@@ -16,7 +16,7 @@ import java.util.*;
 public  class Tache_embarquement  extends Tache 
 { 
 	public Tache_embarquement(Agent a,Vol_depart v){
-		super(v.getHoraire().retrait(new Duree(15)),v.getHoraire().retrait(new Duree(5)),a,v);
+		super(v.getHoraire().retrait(new Duree(15)),v.getHoraire().ajout(new Duree(5)),a,v);
 		this.setType("Embarquement");
 	}
 
