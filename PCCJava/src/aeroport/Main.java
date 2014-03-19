@@ -21,7 +21,7 @@ public class Main {
 		String FvolD = "ProgrammeVolsDeparts14-v2.txt";
 		String choix;
 		
-		HashMap<String, Avion> tousLesAvions = new HashMap<String, Avion>(); //HashMap de tous les avions
+		HashMap<String, Avion> tousLesAvions = new HashMap<String, Avion>(); //HashMap de tous les avions/
 		HashMap<String, Agent> tousLesAgents = new HashMap<String, Agent>(); //HashMap de tous les agents
 		HashMap<String, Vol> tousLesVols = new HashMap<String, Vol>(); //HashMap de tous les Vols
 		
