@@ -157,7 +157,7 @@ public abstract class Agent
 			ArrayList<TrancheHoraire> liste = new ArrayList<TrancheHoraire>();
 			//System.out.println(toString());
 			//afficherTri();
-			boolean temp=true;
+
 			Horaire debutHoraireAgent= this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire();
 			Horaire finHoraireAgent =this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire();
 			ListIterator<Tache> it = getTachesTriees().listIterator();
@@ -168,7 +168,6 @@ public abstract class Agent
 				if(!tp.gethoraireDebut().equals(debutHoraireAgent) && tp.gethoraireDebut().horaireEnMinutes() - debutHoraireAgent.horaireEnMinutes() >=30){
 					//Si la premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
 					liste.add(new TrancheHoraire(debutHoraireAgent, tp.gethoraireDebut()));
-					temp=false;
 				} 
 			
 				while (it.hasNext()) {
@@ -176,12 +175,10 @@ public abstract class Agent
 					
 					if(t.gethoraireDebut().horaireEnMinutes() - tp.gethoraireFin().horaireEnMinutes()>=30){
 						//si le temps entre la fin de la derniere tache et le debut de la tache courante >=30 minutes alors on ajoute la tranche
-						liste.add(new TrancheHoraire(tp.gethoraireFin(), t.gethoraireDebut()));System.out.println(toString());System.out.println("---------------------------------------------------");
-						temp=false;
+						liste.add(new TrancheHoraire(tp.gethoraireFin(), t.gethoraireDebut()));
 					}else if(!it.hasNext() && finHoraireAgent.horaireEnMinutes()-t.gethoraireFin().horaireEnMinutes()>=30){
 						//Derniere Tache si le temps entre la fin de la tahce courante et l'horaire de d�bauche est plus grand que 30mn on ajoute
 						liste.add(new TrancheHoraire(t.gethoraireFin(), finHoraireAgent));
-						temp=false;
 					}
 					
 					tp=t;
@@ -189,10 +186,7 @@ public abstract class Agent
 			}else{
 				//si pas de tache
 				liste.add(new TrancheHoraire(debutHoraireAgent,finHoraireAgent));
-			}
-			
-			
-			
+			}			
 			return liste;
 		}
 		
