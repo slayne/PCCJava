@@ -144,8 +144,8 @@ import java.util.*;
 		boolean affected;
 		for(Agent_temps_plein a : lesAgentsTempsPlein.values()){
 			affected=false;
-			for(TrancheHoraire tr  : a.getTranchesLibres()){
-				if(tr.getDebutTrancheHoraire().compareTo(new Horaire(11,30))>=0 && tr.getDebutTrancheHoraire().compareTo(new Horaire(14,00))<=0){
+			for(TrancheHoraire tr  : a.getTranchesLibreAccueil()){
+				if(!affected && tr.getDebutTrancheHoraire().compareTo(new Horaire(11,30))>=0 && tr.getDebutTrancheHoraire().compareTo(new Horaire(14,00))<=0){
 					a.addTache(new Tache_repas(tr.getDebutTrancheHoraire(), tr.getDebutTrancheHoraire().ajout(new Duree(60)), a));
 					affected=true;
 					break;
