@@ -146,9 +146,8 @@ import java.util.*;
 			affected=false;
 			for(TrancheHoraire tr  : a.getTranchesLibres()){
 				if(tr.getDebutTrancheHoraire().compareTo(new Horaire(11,30))>=0 && tr.getDebutTrancheHoraire().compareTo(new Horaire(14,00))<=0){
-					a.addTache(new Tache_repas(tr.getDebutTrancheHoraire(), tr.getFinTrancheHoraire(), a));
+					a.addTache(new Tache_repas(tr.getDebutTrancheHoraire(), tr.getDebutTrancheHoraire().ajout(new Duree(60)), a));
 					affected=true;
-					System.out.println("test");
 					break;
 				}
 			}
