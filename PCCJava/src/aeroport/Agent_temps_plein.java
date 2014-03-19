@@ -107,9 +107,7 @@ import java.util.*;
 				if(t.gethoraireDebut().horaireEnMinutes()-new Horaire(11,30).horaireEnMinutes()<60){
 					res =false;
 				}
-				if(calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().equals(new Horaire(13, 30))/* && new Horaire(13, 30).ajout(new Duree(60)).horaireEnMinutes()>t.gethoraireDebut().horaireEnMinutes()*/){
-					res=false;
-				}
+			
 			try{
 				Horaire horFin = new ArrayList<Tache>(this.lesTaches.values()).get(this.lesTaches.size()-1).gethoraireFin();
 				horFin.ajout(t.getDuree()); // On a l'horaire de fin de la derniere tache + durée tache sert pour quand on commence � 13h30
@@ -128,21 +126,20 @@ import java.util.*;
 				//sinon il fait le repas
 			
 			}catch(IndexOutOfBoundsException e){
-			
-			}
-			}
-			Horaire hf = this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire();
-			if(hf.compareTo(new Horaire(13,30)) == 0 ){
-				hf=hf.ajout(new Duree(60));
-				if(hf.compareTo(t.gethoraireDebut())>=0){
-					res = false;
-					//On regarde si 13h30 + la tache ne dépasse pas 14h 
-				}
-				
-				// cas ou l'agent est en décalé soir, il doit donc commencer par manger
-													
-			}
 		
+				if(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire().compareTo(new Horaire(13,30)) == 0 ){
+					Horaire hf = this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire();
+					hf.ajout(t.getDuree());
+					if(hf.compareTo(new Horaire(14,0))>=0){
+						res = false;
+						//On regarde si 13h30 + la tache ne dépasse pas 14h 
+					}
+					
+					// cas ou l'agent est en décalé soir, il doit donc commencer par manger
+														
+				}
+			}	
+		}
 			return res;
 	}
 		
@@ -158,7 +155,7 @@ import java.util.*;
 				}
 			}
 			if(!affected){
-				//a.addTache(new Tache_repas(new Horaire(11,30),new Horaire(12,30),a));
+				a.addTache(new Tache_repas(new Horaire(11,30),new Horaire(12,30),a));
 			}
 		}
 	}
