@@ -220,6 +220,23 @@ public  abstract class Tache  implements Comparable<Tache>
 			return res;
 		}
 		
+		// CODE CEC
+		
+		public boolean equals (Object o) {
+			Tache t = (Tache) o;
+			return this.getId() == t.getId();
+		}
+
+		 public Tache(TrancheHoraire t,Agent a,Vol v){
+		    	//estAffectee = false;
+		    	tranche = t;
+		    	idTache=ident;
+		    	lAgent=a;
+		    	leVol=v;
+		    	getLesTaches().put(idTache, this);
+		    	ident++;
+		    }
+
 		
 
 }	

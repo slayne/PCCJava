@@ -269,6 +269,199 @@ public abstract class Agent
 			
 		}
 		
+	// CODE CEC
+		
+		public Horaire getDebutJournee () {
+			return (this.calculTrancheHoraire(NUM_SEM)).getDebutTrancheHoraire();
+		}
+		 
+		public Horaire getFinJournee () {
+			return (this.calculTrancheHoraire(NUM_SEM)).getFinTrancheHoraire();
+		}
+		
+		public void retardTache (Tache t1, Duree d) {
+			
+			Horaire deb = t1.gethoraireFin();
+			Horaire fin = null;
+			boolean reaff=false;
+			// Pour pouvoir traiter le planning hors considération de la tache a retarder
+			lesTaches.remove(t1.getId());
+			// On modifie les horaires de la tache en fonction du retard
+			t1.sethoraireDebut((t1.gethoraireDebut()).ajout(d));
+			t1.sethoraireFin((t1.gethoraireFin()).ajout(d));
+			
+
+			// Calcul de la marge et mise a jour acceuil
+			boolean trouve = false;
+			for(Tache t2 : this.getTachesTriees()){
+				if(deb.compareTo(t2.gethoraireDebut())<=0 && !trouve) {	// Dans le planning, on se situe sur la tache suivant la tache retardee
+					reaff=true;
+					trouve=true;
+					if(t2 instanceof Tache_accueil_Information) {	// On prend en compte le cas ou la tache suivante est une tache d'acceuil et que l'on peut donc la supprimer
+						fin=t2.gethoraireFin();
+					}
+					else {
+						fin=t2.gethoraireDebut();
+					}
+					if(new TrancheHoraire(deb,fin).getDuree().compareTo(d)<0) {	// Marge insuffisante pour retarder la tache
+						this.affecterTacheAccueilAfter(); // Rajout de tache accueil si necessaire
+						this.affecterTache(t1); // Va ajouter la tache au premier agent disponible
+					}
+					else { // Marge suffisante
+						if(t2 instanceof Tache_accueil_Information) { // On supprime la tache d'accueil qui suit si elle existe	
+							lesTaches.remove(t2.getId());
+							Tache.toutesLesTaches().remove(t2.getId());
+							// Création d'une nouvelle tache accueil si besoin
+							TrancheHoraire temp=new TrancheHoraire(t1.gethoraireFin(),fin);
+							if(temp.getDuree().compareTo(new Duree(0,30))>=0) {
+								this.addTache(new Tache_accueil_Information(temp,this));
+							}
+						}
+					}
+				}
+				if(t2.equals(t1)) {
+					trouve=true;
+				}
+			}
+			if(!reaff) {	// La tache retardee est la derniere de la journee
+				if(t1.gethoraireFin().compareTo(this.getFinJournee())>0) {	// Avec le retard, la tache termine apres la fin de journee de l'agent
+					lesTaches.remove(t1.getId());
+					this.affecterTacheAccueilAfter(); // Rajout de tache accueil si necessaire
+					this.affecterTache(t1); // Va ajouter la tache au premier agent disponible
+				}
+			}
+		}
+		
+		public void affecterTache (Tache t) {
+			Horaire deb=null, deb_aux=null, fin=null;
+			boolean reaff=false;
+			for(Agent a : lesAgents.values()) {	// On regarde chaque agent
+				if(!(a.equals(this)||reaff)) {	// On ne traite pas l'agent dont on reaffecte la tache ou si la tache est deja reaffectee
+					deb_aux = a.getDebutJournee();	// Initialisation pour qu'a la premiere iteration des taches d'un agent, on affecte l'horaire de debut de journée à deb
+					for(Tache tcour : a.getTachesTriees()) {	// On regarde son planning
+						deb=deb_aux;
+						if(tcour instanceof Tache_accueil_Information) {
+							fin=tcour.gethoraireFin();
+						}
+						else {
+							fin=tcour.gethoraireDebut();
+						}
+						if(t.getTranche().dansTrancheHoraire(deb,fin)) { 	// Espace adapté pour ajouter la tache
+							if(tcour instanceof Tache_accueil_Information) {	// Suppression de l'eventuelle tache acceuil
+								a.getLesTaches().remove(tcour.getId());
+								Tache.toutesLesTaches().remove(tcour);
+							}
+							a.reorganisationEspace(t,deb, fin);
+							reaff=true;
+						}
+						deb_aux=tcour.gethoraireFin();
+					}
+					if(!reaff) { // Si toujours pas affecte pour cet agent, on va tester l'espace entre la fin de la derniere tache de sa journée et la fin de sa journée
+						if(t.getTranche().dansTrancheHoraire(deb_aux,a.getFinJournee())) { 	// Espace suffisant pour ajouter la tache
+							a.reorganisationEspace(t,deb_aux,getFinJournee());
+							reaff=true;
+						}
+					}
+				}
+				
+			}
+		}
+		
+		/* Cette fonction doit etre appellée lorsqu'un agent est absent, on va alors réaffecter
+		toutes ses taches aux autres agents */
+		public static void abscenceAgent (String a) {
+			
+			for(Tache t : lesAgents.get(a).lesTaches.values()) {
+				if(t instanceof Tache_accueil_Information || t instanceof Tache_repas) {
+					// On supprime la tache de la liste static de toutes les taches
+					Tache.toutesLesTaches().remove(t.getId());
+				}
+				else {	// Pour les taches liées à des vols, on réaffecte
+					lesAgents.get(a).affecterTache(t);
+				}
+			}
+			// On ne supprime pas les taches du planning de l'agent au fur et a mesure car on va supprimer l'agent
+			lesAgents.remove(a);
+		}
+		
+		
+		// On va ajouter une tache t a un agent et reorganiser l'espace autour de cette tache
+		// c'est-à-dire ajouter des taches accueil avant ET/OU apres si nécéssaire
+		// deb et fin représentent l'horaire de début et fin de la tranche dans laquelle on va ajouter la tache t
+		public void reorganisationEspace (Tache t, Horaire deb, Horaire fin) {
+			TrancheHoraire temp = new TrancheHoraire(deb,t.gethoraireDebut());
+			if(temp.getDuree().compareTo(new Duree(0,30))>=0) {
+				// Nouvelle tache accueil entre la fin de la tache precedente et le debut de la nouvelle tache
+				this.addTache(new Tache_accueil_Information(temp,this));
+				System.out.println("AFfectation acueil avnat");
+				System.out.println(temp.toString());
+			}
+			temp.setDebutTrancheHoraire(t.gethoraireFin());
+			temp.setFinTrancheHoraire(fin);
+			if(temp.getDuree().compareTo(new Duree(0,30))>=0) {
+				// Nouvelle tache accueil entre la fin de la nouvelle tache et le debut de la tache courante
+				this.addTache(new Tache_accueil_Information(temp,this));
+				System.out.println("AFfectation acueil apres");
+				System.out.println(temp.toString());
+			}
+			this.addTache(t);
+		}
+		
+		  public boolean equals(Object o){
+			  Agent a=(Agent) o;
+			  return this.getCodeAgent()==a.getCodeAgent();
+		  }
+			
+			public void affecterTacheAccueilAfter () {
+				Horaire deb=this.getDebutJournee();
+				Horaire fin=null;
+				Tache tprec=null;
+				Tache temp=null;
+				for(Tache tcour : this.getTachesTriees()) {
+					temp = tcour;	// Pour sauvegarder la derniere tache du planning
+					if(tcour instanceof Tache_accueil_Information) {
+						fin=tcour.gethoraireFin();
+						if(tprec==null) {	// La premiere tache rencontree est une tache accueil
+							tcour.sethoraireDebut(deb);
+						}
+						if(tprec instanceof Tache_accueil_Information) {
+							// On a deux taches accueil a la suite avec un espace entre crée par une délétion
+							tcour.sethoraireDebut(tprec.gethoraireDebut());
+							Tache.toutesLesTaches().remove(tprec.getId());
+						}
+					}
+					else {
+						fin=tcour.gethoraireDebut();
+						if(tprec instanceof Tache_accueil_Information && tprec.gethoraireFin().compareTo(tcour.gethoraireDebut())!=0) {
+							// La tache precedente est une tache accueil et il existe un intervalle entre elle et la suivant
+							// On va donc rallonger la durée de la tache accueil
+							tprec.sethoraireFin(tcour.gethoraireDebut());
+						}
+						else {
+							if(deb.getDuree(fin).compareTo(new Duree(0,30))>=0) { // Il faut ajouter une tache accueil
+									this.addTache(new Tache_accueil_Information(deb,fin,this));
+							}
+						}
+					}
+					deb=tcour.gethoraireFin();
+					tprec=tcour;
+				}
+				// Pour traiter l'intervalle entre la derniere tache et l'horaire de fin de journée
+				fin=this.getFinJournee();
+				if(temp instanceof Tache_accueil_Information) {	// La derniere tache est une tache accueil
+					temp.sethoraireFin(fin);
+				}
+				else {
+					if(deb.getDuree(fin).compareTo(new Duree(0,30))>=0) { 	// Il faut ajouter une tache accueil
+						this.addTache(new Tache_accueil_Information(deb,fin,this));
+					}
+				}
+			}
+
+		
+		
+
+		
 			
 } //End Class Agent
 

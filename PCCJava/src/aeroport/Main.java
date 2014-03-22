@@ -80,6 +80,65 @@ public class Main {
 		//choix = "IT4444"; //"interagir("Saisir le numéro d'un vol : ");
 		//System.out.println("Vous avez saisi : " + choix);
 		//Vol.afficherListeTachesVol(choix); 
+		
+		/*
+		 * 
+		 * TESTS CEC
+		 * 
+		System.out.println("\n\nTest apres suppression de l'agent P002");
+		// Test absence agent
+		Agent.abscenceAgent("P0002");
+		Agent.afficherLesAgents();
+		//System.out.println(Agent.getLesAgents().get("P0017").toString());
+		System.out.println(Tache.getNbTacheNonAffecte());
+		System.out.println(Tache.getNbTacheAffecte());
+		System.out.println(Tache.getLesTaches().size());
+		System.out.println(Tache.getTacheRepas());
+		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
+		//ArrayList<Agent> lesA = new ArrayList(Agent.toArray)
+		
+		tousLesAgents = Agent.getLesAgents();
+		System.out.println("Nombre d'agents : " +tousLesAgents.size());
+		System.out.println("Nombre de taches :" + Tache.toutesLesTaches().size());*/
+		
+		/*
+		// Test deletion vol
+		Vol.deletionVol("IT4444");
+		Agent.afficherLesAgents();
+		//System.out.println(Agent.getLesAgents().get("P0017").toString());
+		System.out.println(Tache.getNbTacheNonAffecte());
+		System.out.println(Tache.getNbTacheAffecte());
+		System.out.println(Tache.getLesTaches().size());
+		System.out.println(Tache.getTacheRepas());
+		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
+		tousLesVols = Vol.getLesVols();
+		System.out.println("Nombre de vols : " +tousLesVols.size());
+		 
+		
+		
+		// Test retard vol
+		Vol.retardVol("IT1919",new Duree(0,30));
+		Agent.afficherLesAgents();
+		//System.out.println(Agent.getLesAgents().get("P0017").toString());
+		System.out.println(Tache.getNbTacheNonAffecte());
+		System.out.println(Tache.getNbTacheAffecte());
+		System.out.println(Tache.getLesTaches().size());
+		System.out.println(Tache.getTacheRepas());
+		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
+		
+		
+		
+		//Test retard vol OK
+		Vol.retardVol("IT1919",new Duree(4,0));
+		Agent.afficherLesAgents();
+		//System.out.println(Agent.getLesAgents().get("P0017").toString());
+		System.out.println(Tache.getNbTacheNonAffecte());
+		System.out.println(Tache.getNbTacheAffecte());
+		System.out.println(Tache.getLesTaches().size());
+		System.out.println(Tache.getTacheRepas());
+		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
+		*/
+
 	
 
 	}

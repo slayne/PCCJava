@@ -105,6 +105,25 @@ public abstract class Vol
 			}
 		}
 		
+		// CODE CEC
+		
+		public static void deletionVol (String s) {
+			for(Tache t : lesVols.get(s).lesTaches.values()){
+				t.getAgent().lesTaches.remove(t.getId());	// suppression de la tache du planning de l'agent
+				(Tache.getLesTaches()).remove(t.getId());		// suppression de la tache de la liste static des taches
+				(t.getAgent()).affecterTacheAccueilAfter();			// affectation d'une tache d'accueil si besoin
+			}
+			lesVols.remove(s);									// suppression du vol de la liste static des vols
+		}
+		
+		public static void retardVol (String s, Duree d) {
+			for(Tache t : lesVols.get(s).lesTaches.values()){
+				(t.getAgent()).retardTache(t,d);
+			}
+		}
+		
+
+		
 
 	
 	

@@ -27,6 +27,13 @@ public  class Tache_accueil_Information  extends Tache
 	
 	}
 	
+	// CODE CEC
+	
+			public Tache_accueil_Information (TrancheHoraire t, Agent a) {
+				super(t,a,null);
+				this.setType("Accueil-Information");
+			}
+
 		
 	
 	

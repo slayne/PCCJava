@@ -72,6 +72,12 @@ public class Horaire implements Comparable, Cloneable{
 	  
   }
 
+ // CODE CEC
+  
+  public Duree getDuree (Horaire fin) {
+	  return new Duree(fin.horaireEnMinutes()-this.horaireEnMinutes());
+  }
+
 
 }
 
