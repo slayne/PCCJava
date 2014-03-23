@@ -123,36 +123,9 @@ public abstract class Agent
 			
 			return this.calculTrancheHoraire(NUM_SEM).contient(tr);
 		}
+		
 		public abstract boolean peutFaireRepas(Tache t);
-		
-		public ArrayList<TrancheHoraire> getTranchesLibres(){
-			ArrayList<TrancheHoraire> liste = new ArrayList<TrancheHoraire>();
-			boolean temp=true;
-			Horaire debutHoraireAgent= this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire();
-			Horaire lasthorairefin=this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire(); // Horaire fin de la tache pr�c�dente
-			// On parcours les taches de l'agent pour trouver tous les trous
-			for(Tache t : this.getTachesTriees()){
-				if(temp){
-					if(!t.gethoraireDebut().equals(debutHoraireAgent) && t.gethoraireDebut().horaireEnMinutes() - debutHoraireAgent.horaireEnMinutes() >=30){
-						//Si la premiere tache ne commence pas � son heure d'embauche et qu'il ne commence pas avant 30 mn on ajoute la tranche
-						liste.add(new TrancheHoraire(this.calculTrancheHoraire(NUM_SEM).getDebutTrancheHoraire(), t.gethoraireDebut()));
-						temp=false;
-					}else if(t.gethoraireDebut().horaireEnMinutes() - lasthorairefin.horaireEnMinutes()>=30){
-						//si le temps entre la fin de la derniere tache et le debut de la tache courante >=30 minutes alors on ajoute la tranche
-						liste.add(new TrancheHoraire(lasthorairefin, t.gethoraireDebut()));
-						temp=false;
-					}else if(this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire().horaireEnMinutes()-t.gethoraireFin().horaireEnMinutes()>=30){
-						//si le temps entre la fin de la tahce courante et l'horaire de d�bauche est plus grand que 30mn on ajoute
-						liste.add(new TrancheHoraire(t.gethoraireFin(), this.calculTrancheHoraire(NUM_SEM).getFinTrancheHoraire()));
-						temp=false;
-					}
-					lasthorairefin=t.gethoraireFin();
-				}
-			}	
-			
-			return liste;
-		}
-		
+
 		public ArrayList<TrancheHoraire> getTranchesLibreAccueil(){
 			ArrayList<TrancheHoraire> liste = new ArrayList<TrancheHoraire>();
 			//System.out.println(toString());

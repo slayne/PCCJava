@@ -30,10 +30,6 @@ public  class Avion
 		private String modele;
 		private int capacite;
 		private static HashMap<String, Avion> lesAvions = new  HashMap<String, Avion>();
-	
-	//Attributes Association
-	
-		Vol lesVols[];
 	 
 		
 
