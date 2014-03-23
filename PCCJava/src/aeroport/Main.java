@@ -51,6 +51,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+		
 		//Tache.afficherLesTaches();
 		//Affectation des taches
 		Agent.construirePlanning();
@@ -62,6 +63,7 @@ public class Main {
 		System.out.println(Tache.getTacheRepas());
 		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
 		//ArrayList<Agent> lesA = new ArrayList(Agent.toArray)
+		 
 		
 		
 		//Le système affiche le MENU ...
@@ -81,10 +83,7 @@ public class Main {
 		//System.out.println("Vous avez saisi : " + choix);
 		//Vol.afficherListeTachesVol(choix); 
 		
-		/*
-		 * 
-		 * TESTS CEC
-		 * 
+		/* 
 		System.out.println("\n\nTest apres suppression de l'agent P002");
 		// Test absence agent
 		Agent.abscenceAgent("P0002");
@@ -101,7 +100,7 @@ public class Main {
 		System.out.println("Nombre d'agents : " +tousLesAgents.size());
 		System.out.println("Nombre de taches :" + Tache.toutesLesTaches().size());
 		
-		*/
+		/*
 		// Test deletion vol
 		Vol.deletionVol("AF0012");
 		Agent.afficherLesAgents();
@@ -112,9 +111,7 @@ public class Main {
 		System.out.println(Tache.getTacheRepas());
 		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
 		tousLesVols = Vol.getLesVols();
-		System.out.println("Nombre de vols : " +tousLesVols.size());
-		/*
-		 
+		System.out.println("Nombre de vols : " +tousLesVols.size());		 
 		
 		
 		// Test retard vol
@@ -139,6 +136,26 @@ public class Main {
 		System.out.println(Tache.getTacheRepas());
 		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
 		*/
+		
+		
+		Vol.afficherVol("IT0056");
+		Tache.afficherTache(1);
+		Agent.afficherAgent("P0014");
+		Agent.afficherAgent("M0040");
+		
+		Vol.afficherListeDesVols();
+		Tache.afficherLesTaches();
+		Tache.afficherTachesAccueil();
+		Tache.afficherTachesRepas();
+		Tache.afficherTachesDebarquement();
+		Tache.afficherTachesEmbarquement();
+		Tache.afficherTachesEnregistrement();
+		Agent.afficherLesAgentsSansTaches();
+		Agent.afficherAgentsTP();
+		Agent.afficherAgentsMT();
+		Agent.afficherAgentsTpSansTaches();
+		Agent.afficherAgentsMtSansTaches();
+		
 
 	
 

@@ -201,12 +201,84 @@ public abstract class Agent
 		
 		
 		public static void afficherLesAgents(){
+			System.out.println("\nListe des agents : ");
 			for(Agent a : lesAgents.values()){
-				System.out.println();
+				a.afficherAgent();
+			}
+		}
+		
+		public static void afficherLesAgentsSansTaches() {
+			System.out.println("\nListe des agents : ");
+			for(Agent a : lesAgents.values()) {
 				System.out.println(a.toString());
-				System.out.println("Taches :");
-				for(Tache t : a.getTachesTriees()){
-					System.out.println(t.toString());
+			}
+		}
+		
+		public static void afficherAgentsTpSansTaches() {
+			System.out.println("\nListe des agents temps plein : ");
+			for(Agent a : lesAgents.values()) {
+				if(a instanceof Agent_temps_plein) {
+					System.out.println(a.toString());
+				}
+			}
+		}
+		
+		public static void afficherAgentsMtSansTaches() {
+			System.out.println("\nListe des agents mi temps : ");
+			for(Agent a : lesAgents.values()) {
+				if(a instanceof Agent_mi_temps) {
+					System.out.println(a.toString());
+				}
+			}			
+		}
+		
+		public static void afficherListeTachesUnAgent(String codeA){
+			
+			for(Agent a : lesAgents.values()){
+				if(a.getCodeAgent().equals(codeA)){
+					System.out.println("Liste des taches de l'agent : " + a.getCodeAgent());
+					for(Tache t : a.getLesTaches().values()){
+						System.out.println(t.toString());
+					}
+				}
+				
+			}
+			
+		}
+		
+		public static void afficherAgent (String code) {
+			System.out.println();
+			System.out.println(lesAgents.get(code).toString());
+			System.out.println("Taches :");
+			for(Tache t : lesAgents.get(code).getTachesTriees()){
+				System.out.println(t.toString());
+			}
+		}
+		
+		public void afficherAgent () {
+			System.out.println();
+			System.out.println(this.toString());
+			System.out.println("Taches :");
+			for(Tache t : this.getTachesTriees()){
+				System.out.println(t.toString());
+			}
+			
+		}
+		
+		public static void afficherAgentsTP () {
+			System.out.println("\nListe des agents temps plein : ");
+			for(Agent a : lesAgents.values()) {
+				if(a instanceof Agent_temps_plein) {
+					a.afficherAgent();
+				}
+			}
+		}
+		
+		public static void afficherAgentsMT () {
+			System.out.println("\nListe des agents mi temps : ");
+			for(Agent a : lesAgents.values()) {
+				if(a instanceof Agent_mi_temps) {
+					a.afficherAgent();
 				}
 			}
 		}
@@ -226,23 +298,6 @@ public abstract class Agent
 		public HashMap<Integer,Tache> getLesTaches(){
 			return lesTaches;
 		}
-		
-		
-		public static void afficherListeTachesUnAgent(String codeA){
-			
-			for(Agent a : lesAgents.values()){
-				if(a.getCodeAgent().equals(codeA)){
-					System.out.println("Liste des taches de l'agent : " + a.getCodeAgent());
-					for(Tache t : a.getLesTaches().values()){
-						System.out.println(t.toString());
-					}
-				}
-				
-			}
-			
-		}
-		
-	// CODE CEC
 		
 		public Horaire getDebutJournee () {
 			return (this.calculTrancheHoraire(NUM_SEM)).getDebutTrancheHoraire();
@@ -277,6 +332,7 @@ public abstract class Agent
 						fin=t2.gethoraireDebut();
 					}
 					if(new TrancheHoraire(deb,fin).getDuree().compareTo(d)<0) {	// Marge insuffisante pour retarder la tache
+						lesTaches.remove(t1.getId());
 						this.affecterTacheAccueilAfter(); // Rajout de tache accueil si necessaire
 						res=this.affecterTache(t1); // Va ajouter la tache au premier agent disponible
 					}
@@ -376,16 +432,12 @@ public abstract class Agent
 			if(temp.getDuree().compareTo(new Duree(0,30))>=0) {
 				// Nouvelle tache accueil entre la fin de la tache precedente et le debut de la nouvelle tache
 				this.addTache(new Tache_accueil_Information(temp,this));
-				System.out.println("AFfectation acueil avnat");
-				System.out.println(temp.toString());
 			}
 			temp.setDebutTrancheHoraire(t.gethoraireFin());
 			temp.setFinTrancheHoraire(fin);
 			if(temp.getDuree().compareTo(new Duree(0,30))>=0) {
 				// Nouvelle tache accueil entre la fin de la nouvelle tache et le debut de la tache courante
 				this.addTache(new Tache_accueil_Information(temp,this));
-				System.out.println("AFfectation acueil apres");
-				System.out.println(temp.toString());
 			}
 			t.setAgent(this);
 			this.addTache(t);
@@ -396,54 +448,52 @@ public abstract class Agent
 			  return this.getCodeAgent()==a.getCodeAgent();
 		  }
 			
-			public void affecterTacheAccueilAfter () {
-				Horaire deb=this.getDebutJournee();
-				Horaire fin=null;
-				Tache tprec=null;
-				Tache temp=null;
-				for(Tache tcour : this.getTachesTriees()) {
-					temp = tcour;	// Pour sauvegarder la derniere tache du planning
-					if(tcour instanceof Tache_accueil_Information) {
-						fin=tcour.gethoraireFin();
-						if(tprec==null) {	// La premiere tache rencontree est une tache accueil
-							tcour.sethoraireDebut(deb);
-						}
-						if(tprec instanceof Tache_accueil_Information) {
-							// On a deux taches accueil a la suite avec un espace entre crée par une délétion
+
+		public void affecterTacheAccueilAfter () {
+			Tache tprec=null;
+			Duree demiheure = new Duree(0,30);
+			
+			for(Tache tcour : this.getTachesTriees ()) {
+				if(tcour instanceof Tache_accueil_Information) {
+					if(tprec==null) {	// Cas début de la journée - accueil
+						tcour.sethoraireDebut(this.getDebutJournee());
+					}
+					else {
+						if(tprec instanceof Tache_accueil_Information) {	// Cas accueil - accueil
 							tcour.sethoraireDebut(tprec.gethoraireDebut());
+							lesTaches.remove(tprec.getId());
 							Tache.toutesLesTaches().remove(tprec.getId());
+						}
+						else {	// Cas tâche autre - accueil
+							tcour.sethoraireDebut(tprec.gethoraireFin());
+						}
+					}
+				}
+				else {
+					if(tprec==null) {
+						if(this.getDebutJournee().getDuree(tcour.gethoraireDebut()).compareTo(demiheure)>=0) { // Cas début de la journée - tâche autre
+							this.addTache(new Tache_accueil_Information(this.getDebutJournee(),tcour.gethoraireDebut(),this));
 						}
 					}
 					else {
-						fin=tcour.gethoraireDebut();
-						if(tprec instanceof Tache_accueil_Information && tprec.gethoraireFin().compareTo(tcour.gethoraireDebut())!=0) {
-							// La tache precedente est une tache accueil et il existe un intervalle entre elle et la suivant
-							// On va donc rallonger la durée de la tache accueil
+						if(tprec instanceof Tache_accueil_Information) {	// Cas accueil - tâche autre
 							tprec.sethoraireFin(tcour.gethoraireDebut());
 						}
-						else {
-							if(deb.getDuree(fin).compareTo(new Duree(0,30))>=0) { // Il faut ajouter une tache accueil
-									this.addTache(new Tache_accueil_Information(deb,fin,this));
-							}
+						else if (tprec.gethoraireFin().getDuree(tcour.gethoraireDebut()).compareTo(demiheure)>=0) {	// Cas tâche autre - tâche autre
+							this.addTache(new Tache_accueil_Information(tprec.gethoraireFin(),tcour.gethoraireDebut(),this));
 						}
 					}
-					deb=tcour.gethoraireFin();
-					tprec=tcour;
 				}
-				// Pour traiter l'intervalle entre la derniere tache et l'horaire de fin de journée
-				fin=this.getFinJournee();
-				if(temp instanceof Tache_accueil_Information) {	// La derniere tache est une tache accueil
-					temp.sethoraireFin(fin);
-				}
-				else {
-					System.out.println(deb.toString() + "  " + fin.toString());
-					if(deb.getDuree(fin).compareTo(new Duree(0,30))>=0) { 	// Il faut ajouter une tache accueil
-						this.addTache(new Tache_accueil_Information(deb,fin,this));
-					}
-				}
+				tprec=tcour;
 			}
-
-		
+			if(tprec instanceof Tache_accueil_Information) { // Cas accueil - fin de journée
+				tprec.sethoraireFin(this.getFinJournee());
+			}
+			else if (tprec.gethoraireFin().getDuree(this.getFinJournee()).compareTo(demiheure)>=0) { // Cas tâche autre - fin de journée
+				this.addTache(new Tache_accueil_Information(tprec.gethoraireFin(),this.getFinJournee(),this));
+			}
+		}
+	
 		
 
 		

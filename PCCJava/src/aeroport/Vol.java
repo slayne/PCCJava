@@ -101,11 +101,17 @@ public abstract class Vol
 			
 			System.out.println("\nListe des vols : ");
 			for(Vol v : lesVols.values()){
-				System.out.println(v.toString());
+				v.afficherVol();
 			}
 		}
 		
-		// CODE CEC
+		public static void afficherVol (String code) {
+			System.out.println(lesVols.get(code).toString());
+		}
+		
+		public void afficherVol () {
+			System.out.println(this.toString());
+		}
 		
 		public static void deletionVol (String s) {
 			for(Tache t : lesVols.get(s).lesTaches.values()){

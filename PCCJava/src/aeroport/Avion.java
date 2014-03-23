@@ -53,6 +53,21 @@ public  class Avion
 			//lesAvions.put(codeAvion, this);
 			
 		}
+		
+		public static void afficherLesAvions () {
+			System.out.println("\nListe des avions : ");
+			for(Avion v : lesAvions.values()) {
+				v.afficherAvion();
+			}
+		}
+		
+		public void afficherAvion () {
+			System.out.println(this.toString());
+		}
+		
+		public void afficherAvion(String code) {
+			System.out.println(lesAvions.get(code).toString());
+		}
 	
 		public int getCapacite(){
 			return capacite;

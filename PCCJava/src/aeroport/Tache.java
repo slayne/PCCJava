@@ -162,15 +162,63 @@ public  abstract class Tache  implements Comparable<Tache>
 			return getLesTaches();
 		}
 		
-		
-		
-		public void afficherUneTache(){
-			System.out.println(toString());
+		public static void afficherLesTaches(){
+			System.out.println("\nListe des taches : ");
+			for(Tache t : getTachesTriees()){
+				System.out.println(t.toString());
+			}
 		}
 		
-		public static void afficherLesTaches(){
-			for(Tache t : getLesTaches().values()){
-				System.out.println(t.toString());
+		public void afficherTache(){
+			System.out.println(this.toString());
+		}
+		
+		public static void afficherTache(int id) {
+			System.out.println(lesTaches.get(id).toString());
+		}
+		
+		public static void afficherTachesAccueil () {
+			System.out.println("\nListe des taches accueil : ");
+			for(Tache t : getTachesTriees()) {
+				if(t instanceof Tache_accueil_Information) {
+					t.afficherTache();
+				}
+			}
+		}
+		
+		public static void afficherTachesRepas () {
+			System.out.println("\nListe des taches repas : ");
+			for(Tache t : getTachesTriees()) {
+				if(t instanceof Tache_repas) {
+					t.afficherTache();
+				}
+			}
+		}
+		
+		public static void afficherTachesDebarquement () {
+			System.out.println("\nListe des taches débarquement : ");
+			for(Tache t : getTachesTriees()) {
+				if(t instanceof Tache_debarquement) {
+					t.afficherTache();
+				}
+			}
+		}
+		
+		public static void afficherTachesEmbarquement () {
+			System.out.println("\nListe des taches embarquement : ");
+			for(Tache t : getTachesTriees()) {
+				if(t instanceof Tache_embarquement) {
+					t.afficherTache();
+				}
+			}
+		}
+		
+		public static void afficherTachesEnregistrement () {
+			System.out.println("\nListe des taches enregistrement : ");
+			for(Tache t : getTachesTriees()) {
+				if(t instanceof Tache_enregistrement) {
+					t.afficherTache();
+				}
 			}
 		}
 		
