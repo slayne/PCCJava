@@ -99,11 +99,11 @@ public class Main {
 		
 		tousLesAgents = Agent.getLesAgents();
 		System.out.println("Nombre d'agents : " +tousLesAgents.size());
-		System.out.println("Nombre de taches :" + Tache.toutesLesTaches().size());*/
+		System.out.println("Nombre de taches :" + Tache.toutesLesTaches().size());
 		
-		/*
+		*/
 		// Test deletion vol
-		Vol.deletionVol("IT4444");
+		Vol.deletionVol("AF0012");
 		Agent.afficherLesAgents();
 		//System.out.println(Agent.getLesAgents().get("P0017").toString());
 		System.out.println(Tache.getNbTacheNonAffecte());
@@ -113,6 +113,7 @@ public class Main {
 		System.out.println(Agent_temps_plein.getAgentsTempsPlein().size());
 		tousLesVols = Vol.getLesVols();
 		System.out.println("Nombre de vols : " +tousLesVols.size());
+		/*
 		 
 		
 		

@@ -24,7 +24,7 @@ import java.io.*;
 public abstract class Agent 
 { 
 	//Attributes
-	public static int NUM_SEM=2;
+	public static int NUM_SEM=1;
 	private String codeAgent;
 	private String nom;
 	private String prenom;
@@ -436,6 +436,7 @@ public abstract class Agent
 					temp.sethoraireFin(fin);
 				}
 				else {
+					System.out.println(deb.toString() + "  " + fin.toString());
 					if(deb.getDuree(fin).compareTo(new Duree(0,30))>=0) { 	// Il faut ajouter une tache accueil
 						this.addTache(new Tache_accueil_Information(deb,fin,this));
 					}

@@ -109,9 +109,11 @@ public abstract class Vol
 		
 		public static void deletionVol (String s) {
 			for(Tache t : lesVols.get(s).lesTaches.values()){
-				t.getAgent().lesTaches.remove(t.getId());	// suppression de la tache du planning de l'agent
+				if(t.getAgent()!=null) { // La tache est affectée
+					t.getAgent().lesTaches.remove(t.getId());	// suppression de la tache du planning de l'agent
+					(t.getAgent()).affecterTacheAccueilAfter();			// affectation d'une tache d'accueil si besoin
+				}
 				(Tache.getLesTaches()).remove(t.getId());		// suppression de la tache de la liste static des taches
-				(t.getAgent()).affecterTacheAccueilAfter();			// affectation d'une tache d'accueil si besoin
 			}
 			lesVols.remove(s);									// suppression du vol de la liste static des vols
 		}
