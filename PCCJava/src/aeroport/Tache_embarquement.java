@@ -15,33 +15,36 @@ import java.util.*;
 
 public  class Tache_embarquement  extends Tache 
 { 
+	
+	private static HashMap<Integer,Tache_embarquement> lesTachesEmbarquement = new HashMap<Integer,Tache_embarquement>();
+	private static int ident=1;
+	
+	
+	
 	public Tache_embarquement(Agent a,Vol_depart v){
 		super(v.getHoraire().retrait(new Duree(15)),v.getHoraire().ajout(new Duree(5)),a,v);
 		this.setType("Embarquement");
+		
+		lesTachesEmbarquement.put(ident, this);
+		ident++;
 	}
 
-	//Attributes
-		
-		
-	
-	
-	//Attributes Association
-	
-	
-	
-	
-	
 
+	public static void lesInstances()
+	{
 	
-	//Operations
+			for(int i=0; i<lesTachesEmbarquement.size();i++){
+	   			System.out.println(lesTachesEmbarquement.get(i).toString());
+			}
 	
-		public 
-	 void lesInstances()
-		{
+	}
 	
-	   		// TODO: implement
 	
-		}
+	public String toString(){
+		
+		return super.toString();
+	}
+	
 	
 		
 	

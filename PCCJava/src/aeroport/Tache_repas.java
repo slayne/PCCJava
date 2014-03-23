@@ -15,21 +15,34 @@ import java.util.*;
 
 public  class Tache_repas  extends Tache 
 { 
+	
+		private static HashMap<Integer,Tache_repas> lesTachesRepas = new HashMap<Integer,Tache_repas>();
+		private static int ident=1;
+		
+		
 		public Tache_repas(Horaire dd, Horaire df, Agent a){
 			super(dd,df,a,null);
 			this.setType("Repas");
+			lesTachesRepas.put(ident, this);
+			ident++;
+			
 		}
-	
-		public 
-	 void lesInstances()
-		{
-	
-	   		// TODO: implement
-	
-		}
-	
 		
-	
+		public static void lesInstances()
+		{
+		
+				for(int i=0; i<lesTachesRepas.size();i++){
+		   			System.out.println(lesTachesRepas.get(i).toString());
+				}
+		
+		}
+		
+		
+		public String toString(){
+			
+			return super.toString();
+		}
+		
 	
 
 } //End Class Tache_repas

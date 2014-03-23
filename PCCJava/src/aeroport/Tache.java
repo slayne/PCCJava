@@ -2,10 +2,8 @@ package aeroport;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.logging.Level;
 
 
 /**************************************************************************
@@ -61,7 +59,7 @@ public  abstract class Tache  implements Comparable<Tache>
 	    	ident++;
 	    }
 		
-		public void lesInstances(){
+		public static void lesInstances(){
 			for(Tache t : getLesTaches().values()){
 				System.out.println(t.toString());
 			}
