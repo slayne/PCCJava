@@ -82,7 +82,7 @@ public  class Agent_mi_temps  extends Agent
 			deb = new Horaire(9,0);
 			fin = new Horaire(12,30);
 		}
-		if((getCodeCycle()==1 && numSemaine%1==2) || (getCodeCycle()==2 && numSemaine%3==0) || (getCodeCycle()==3 && numSemaine%3==1)) {
+		if((getCodeCycle()==1 && numSemaine%3==2) || (getCodeCycle()==2 && numSemaine%3==0) || (getCodeCycle()==3 && numSemaine%3==1)) {
 			// horaire matin
 			deb = new Horaire(5,30);
 			fin = new Horaire(9,0);
@@ -92,9 +92,7 @@ public  class Agent_mi_temps  extends Agent
 			deb = new Horaire(20,0);
 			fin = new Horaire(23,30);
 		}
-		TrancheHoraire t = new TrancheHoraire (deb,fin);
-		return t;
-		
+		return new TrancheHoraire (deb,fin);		
 	}
 
 	@Override

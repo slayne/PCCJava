@@ -81,7 +81,7 @@ import java.util.*;
 				deb = new Horaire(9,0);
 				fin = new Horaire(17,0);
 			}
-			if((super.getCodeCycle()==1 && numSemaine%1==2) || (super.getCodeCycle()==2 && numSemaine%3==0) || (super.getCodeCycle()==3 && numSemaine%3==1)) {
+			if((super.getCodeCycle()==1 && numSemaine%3==2) || (super.getCodeCycle()==2 && numSemaine%3==0) || (super.getCodeCycle()==3 && numSemaine%3==1)) {
 				// horaire matin
 				deb = new Horaire(6,0);
 				fin = new Horaire(14,0);
