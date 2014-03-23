@@ -333,6 +333,7 @@ public abstract class Agent
 			}
 			if(!res) {	// On n'est pas parvenus a retarder la tache dans le planning de l'agent ni a la reaffecter a un autre
 				this.lesTaches.remove(t1.getId()); // On supprime la tache du planning, elle sera donc consideree non affectee
+				t1.setAgent(null);
 			}
 		}
 		
@@ -382,7 +383,10 @@ public abstract class Agent
 					Tache.toutesLesTaches().remove(t.getId());
 				}
 				else {	// Pour les taches liées à des vols, on réaffecte
-					lesAgents.get(a).affecterTache(t);
+					if(!lesAgents.get(a).affecterTache(t)) {	// On n'est pas parvenus a reaffecter la tache
+						lesAgents.get(a).lesTaches.remove(t.getId()); // On supprime la tache du planning, elle sera donc consideree non affectee
+						t.setAgent(null);
+					}
 				}
 			}
 			// On ne supprime pas les taches du planning de l'agent au fur et a mesure car on va supprimer l'agent
