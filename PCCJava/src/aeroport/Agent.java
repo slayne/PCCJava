@@ -358,7 +358,6 @@ public abstract class Agent
 					}
 					else {	// Pour les taches liées à des vols, on réaffecte
 						if(!lesAgents.get(a).affecterTache(t)) {	// On n'est pas parvenus a reaffecter la tache
-							lesAgents.get(a).lesTaches.remove(t.getId()); // On supprime la tache du planning, elle sera donc consideree non affectee
 							t.setAgent(null);
 						}
 					}
@@ -388,6 +387,7 @@ public abstract class Agent
 				System.out.println("AFfectation acueil apres");
 				System.out.println(temp.toString());
 			}
+			t.setAgent(this);
 			this.addTache(t);
 		}
 		
