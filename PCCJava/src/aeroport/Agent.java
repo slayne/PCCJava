@@ -283,7 +283,7 @@ public abstract class Agent
 			
 			Horaire deb = t1.gethoraireFin();
 			Horaire fin = null;
-			boolean reaff=false;
+			boolean res=false, reaff=false;
 			// Pour pouvoir traiter le planning hors considération de la tache a retarder
 			lesTaches.remove(t1.getId());
 			// On modifie les horaires de la tache en fonction du retard
@@ -305,10 +305,11 @@ public abstract class Agent
 					}
 					if(new TrancheHoraire(deb,fin).getDuree().compareTo(d)<0) {	// Marge insuffisante pour retarder la tache
 						this.affecterTacheAccueilAfter(); // Rajout de tache accueil si necessaire
-						this.affecterTache(t1); // Va ajouter la tache au premier agent disponible
+						res=this.affecterTache(t1); // Va ajouter la tache au premier agent disponible
 					}
 					else { // Marge suffisante
 						if(t2 instanceof Tache_accueil_Information) { // On supprime la tache d'accueil qui suit si elle existe	
+							res=true;
 							lesTaches.remove(t2.getId());
 							Tache.toutesLesTaches().remove(t2.getId());
 							// Création d'une nouvelle tache accueil si besoin
@@ -327,12 +328,15 @@ public abstract class Agent
 				if(t1.gethoraireFin().compareTo(this.getFinJournee())>0) {	// Avec le retard, la tache termine apres la fin de journee de l'agent
 					lesTaches.remove(t1.getId());
 					this.affecterTacheAccueilAfter(); // Rajout de tache accueil si necessaire
-					this.affecterTache(t1); // Va ajouter la tache au premier agent disponible
+					res=this.affecterTache(t1); // Va ajouter la tache au premier agent disponible
 				}
+			}
+			if(!res) {	// On n'est pas parvenus a retarder la tache dans le planning de l'agent ni a la reaffecter a un autre
+				this.lesTaches.remove(t1.getId()); // On supprime la tache du planning, elle sera donc consideree non affectee
 			}
 		}
 		
-		public void affecterTache (Tache t) {
+		public boolean affecterTache (Tache t) {
 			Horaire deb=null, deb_aux=null, fin=null;
 			boolean reaff=false;
 			for(Agent a : lesAgents.values()) {	// On regarde chaque agent
@@ -365,6 +369,7 @@ public abstract class Agent
 				}
 				
 			}
+			return reaff;
 		}
 		
 		/* Cette fonction doit etre appellée lorsqu'un agent est absent, on va alors réaffecter
