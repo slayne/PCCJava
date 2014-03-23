@@ -377,15 +377,17 @@ public abstract class Agent
 		toutes ses taches aux autres agents */
 		public static void abscenceAgent (String a) {
 			
-			for(Tache t : lesAgents.get(a).lesTaches.values()) {
-				if(t instanceof Tache_accueil_Information || t instanceof Tache_repas) {
-					// On supprime la tache de la liste static de toutes les taches
-					Tache.toutesLesTaches().remove(t.getId());
-				}
-				else {	// Pour les taches liées à des vols, on réaffecte
-					if(!lesAgents.get(a).affecterTache(t)) {	// On n'est pas parvenus a reaffecter la tache
-						lesAgents.get(a).lesTaches.remove(t.getId()); // On supprime la tache du planning, elle sera donc consideree non affectee
-						t.setAgent(null);
+			if(lesAgents.get(a).lesTaches.size()!=0) { // On verifie au préalable que l'agent ait des taches d'affectées
+				for(Tache t : lesAgents.get(a).lesTaches.values()) {
+					if(t instanceof Tache_accueil_Information || t instanceof Tache_repas) {
+						// On supprime la tache de la liste static de toutes les taches
+						Tache.toutesLesTaches().remove(t.getId());
+					}
+					else {	// Pour les taches liées à des vols, on réaffecte
+						if(!lesAgents.get(a).affecterTache(t)) {	// On n'est pas parvenus a reaffecter la tache
+							lesAgents.get(a).lesTaches.remove(t.getId()); // On supprime la tache du planning, elle sera donc consideree non affectee
+							t.setAgent(null);
+						}
 					}
 				}
 			}
