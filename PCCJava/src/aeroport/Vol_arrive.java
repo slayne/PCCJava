@@ -81,10 +81,9 @@ import java.util.*;
 				 
 				 while ((ligne = entree.readLine()) != null) // boucle de lecture/affichage du fichier
 			      {
-			    	 //System.out.println("ligne :" + ligne);
-			    	 mots = new StringTokenizer(ligne);
-			    	 
-			    		mot = mots.nextToken();
+					 //Pour chaque ligne on extrait les mots
+					 	mots = new StringTokenizer(ligne);
+					 	mot = mots.nextToken();
 			    		cde = mot;
 			    		mot = mots.nextToken();
 			    		heure = Integer.parseInt(mot);

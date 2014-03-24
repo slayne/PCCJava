@@ -10,7 +10,6 @@ package aeroport;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -18,11 +17,7 @@ import java.util.*;
 
 
 public  class Avion  
-{ 
-	//Inners Classifiers
-	
-
-	//Attributes
+{
 		
 		
 	
@@ -35,13 +30,10 @@ public  class Avion
 
 		
 		public Avion(String cde, String mod, int cap){
-			//System.out.println("zlllllllllll");
 			codeAvion = cde;
 			modele = mod;
 			capacite = cap;
 			lesAvions.put(codeAvion, this);
-			
-			
 		}
 		
 
@@ -50,7 +42,6 @@ public  class Avion
 			codeAvion = null;
 			modele = null;
 			capacite = 0;
-			//lesAvions.put(codeAvion, this);
 			
 		}
 		
@@ -104,9 +95,8 @@ public  class Avion
 			 
 			 while ((ligne = entree.readLine()) != null) // boucle de lecture/affichage du fichier
 		      {
-		    	 //System.out.println("ligne :" + ligne);
-		    	 mots = new StringTokenizer(ligne);
-		    	//System.out.println(ligne);
+		    	 //Pour chaque ligne on extrait les valeurs ( = des mots)
+		    	 		mots = new StringTokenizer(ligne);
 			    		 mot = mots.nextToken();
 			    		 cde = mot;
 			    		 mot = mots.nextToken();
