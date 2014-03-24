@@ -113,6 +113,27 @@ public abstract class Vol
 			System.out.println(this.toString());
 		}
 		
+		public static void volsArrive() {
+			System.out.println("\nListe des vols arrivée : ");
+			for(Vol v : lesVols.values()){
+				if(v instanceof Vol_arrive) {
+					v.afficherVol();
+				}
+			}
+			
+		}
+		
+		public static void volsDepart() {
+			System.out.println("\nListe des vols départ : ");
+			for(Vol v : lesVols.values()){
+				if(v instanceof Vol_depart) {
+					v.afficherVol();
+				}
+			}
+			
+		}
+
+		
 		public static void deletionVol (String s) {
 			for(Tache t : lesVols.get(s).lesTaches.values()){
 				if(t.getAgent()!=null) { // La tache est affectée
